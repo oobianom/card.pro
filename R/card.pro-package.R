@@ -1,9 +1,7 @@
-#' quickcode
+#' card.pro
 #'
-#' @name quickcode
+#' @name card.pro
 #' @docType package
-#' @importFrom grDevices graphics.off
-#' @importFrom stats sd
 #' @noRd
 #' @keywords internal
 "_PACKAGE"
