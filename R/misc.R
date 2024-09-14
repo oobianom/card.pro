@@ -19,22 +19,30 @@ row <- function(...) {
 #' Use the package scripts and stylesheets in a page
 #'
 #' @param template The template type
-#' @param color The numeric style of template
+#' @param jquery option. logical. include jquery
+#' @param jqueryui option. logical. include jquery UI
+#' @param fontawesome option. logical. include fontawesome
 #'
 #' @return A list of files to be inserted in the header of a page
 #' @examples
-#' cssjsinclude('core','3')
+#' use.cardpro('core')
 #' @export
 #'
-cssjsinclude <- function(template,color){
-  assign('.nGSAscripts',TRUE)
+use.cardpro <- function(template = "bundle", jquery = FALSE, jqueryui = TRUE, fontawesome = TRUE){
+  p.v = 2.1
+  j = ju = fa = NULL
+  if(jquery)j = "opt/jquery-3.7.1.min.js"
+  if(jqueryui)ju = "opt/jquery-ui.min.js"
+  if(fontawesome)fa = "opt/font-awesome.min.css"
+  icon("cog")
+  list(
   htmltools::htmlDependency(
-    "nextGenShinyApps", "2.0",
+    .packageName, p.v,
     src = template.loc(template),
-    script = c("nextgenshinyapps.js"),
-    stylesheet = c("nextgenshinyapps.css", paste0("cust-theme-",color,".css")),
-    all_files = FALSE
-  )
+    script = c(j,ju,paste0("req/",list.files(template.loc(file.path(template,"req")),pattern = ".js$"))),
+    stylesheet = c(fa,paste0("req/",list.files(template.loc(file.path(template,"req")),pattern = ".css$"))),
+    all_files = TRUE
+  ))
 }
 
 #' Nav tag
@@ -64,28 +72,18 @@ nav <- function(class, id = NULL, role = NULL, ...) {
 #'
 #' @return A path for the location of the package
 #' @examples
-#' template.loc('core')
+#' template.loc('bundle')
 #' @export
 #'
-template.loc <- function(template = "core"){
-  file.path(find.package(package = "nextGenShinyApps"),template)
+template.loc <- function(template = "bundle"){
+  file.path(find.package(package = "card.pro"),template)
 }
 
-#' Random number betwen 1 and 10000
-#'
-#' One or more random numbers
-#'
-#' @param num The number of numbers to return
-#'
-#' @return One or more numbers
-#' @examples
-#' rand.num(10)
-#' @export
-#'
+
+
 rand.num <- function(num){
   sample(1:10000, num)
 }
-
 rand.sc13 <-
   as.character(sample(1:13,13))
 

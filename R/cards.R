@@ -99,7 +99,7 @@
 #'
 #' @export
 
-card <- function(...,title = "Standard Card",  collapsed = FALSE, bg.fade = TRUE, width = 12, header.bg = letters[1:13], alert.text = NULL, alert.bg = c("primary", "warning", "secondary", "info", "success", "danger"), toolbar = NULL, header = TRUE, draggable = TRUE, id = NULL) {
+card.pro <- function(...,title = "Standard Card",  collapsed = FALSE, bg.fade = TRUE, width = 12, header.bg = letters[1:13], alert.text = NULL, alert.bg = c("primary", "warning", "secondary", "info", "success", "danger"), toolbar = NULL, header = TRUE, draggable = TRUE, id = NULL) {
   add.collapsed.01 <- ifelse(collapsed, " panel-collapsed ", "")
   alert.bg <- match.arg(alert.bg)
   header.bg <- match.arg(header.bg)[1]
@@ -196,21 +196,20 @@ card <- function(...,title = "Standard Card",  collapsed = FALSE, bg.fade = TRUE
 #'
 #' A grid that holds draggable items
 #'
-#' @param ... The elements to include within the body of the grid
-#' @param width The width of the grid
-#' @param id unique id of grid
+#' @param ... The elements to include within the body of the moveable grid
 #'
 #' @note For more information on the features of a sortable grid, visit the examples section of the help documentation
 #' @return HTML code of a container that allows items within it to be draggable
 #'
 #' @examples
-#'  sortablegrid("item1",width=12)
+#'  moveable(
+#'  div("A"),
+#'  div("B")
+#'  )
 #' @export
 
-sortablegrid <- function(..., width = 6, id = NULL) {
-  width <- as.integer(width)
-  if (width < 1) width <- 1
-  shiny::div(id = ifelse(is.null(id),"",id),class = paste0("col-12 col-md-", width, " p-0 sortable-grid ui-sortable"), ...)
+moveable <- function(...) {
+  shiny::div(id = "widget-grid",shiny::div(id = "row",...))
 }
 
 #' Generate toolbar buttons
