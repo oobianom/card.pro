@@ -3,7 +3,7 @@ library(card.pro)
 
 # Define UI for application that draws a histogram
 ui <- fluidPage(
-    use.cardpro(theme="a"),
+    use.cardpro(theme="b"),
     # Application title
     titlePanel("Old Faithful Geyser Data"),
     # Sidebar with a slider input for number of bins
@@ -16,14 +16,23 @@ ui <- fluidPage(
                            value = 30)
                ,moveable(
                  card.pro("History something",
-                          "what is got",
+                          "Lorem ipsum odor amet, consectetuer adipiscing elit. Massa lectus facilisi ut ultricies eget porta. Lobortis eu magnis sem himenaeos neque; consectetur molestie inceptos ultrices. Ullamcorper nascetur vulputate dolor eros ut convallis quis adipiscing facilisis. Suscipit parturient ad etiam mus netus donec laoreet. Dictumst nibh porttitor felis et habitasse dignissim. Vivamus placerat velit dis odio laoreet.
+
+Interdum bibendum sit ridiculus himenaeos curae. Commodo fames nascetur felis viverra quisque ut fringilla. Dolor sociosqu cursus sem nullam nam euismod; eu consectetur? Congue senectus fames vivamus cursus, cras efficitur. Dictumst euismod ut sem penatibus molestie aptent. Egestas ut consectetur venenatis lacinia mi nostra. Litora consectetur curabitur bibendum pretium aliquam mattis. Montes convallis ornare dignissim et turpis purus blandit congue.
+
+Cursus dolor nullam finibus diam; cras interdum nulla ante? Senectus porttitor malesuada ac consectetur lacinia. Inceptos sodales in class conubia, interdum lacus lectus. Habitant sociosqu orci maecenas cursus ante, aptent odio at. Morbi dolor iaculis elementum lacinia mauris condimentum. Dignissim turpis interdum accumsan fringilla molestie vel facilisi. Litora at vehicula nisi condimentum posuere; tempus tellus vehicula. Ultricies tempor eget finibus nec pretium iaculis nulla posuere vivamus. Ac nisl accumsan pellentesque blandit inceptos ac rhoncus eget.
+
+Egestas ornare turpis proin scelerisque commodo faucibus? Pellentesque vulputate ante cursus malesuada ante tincidunt gravida a! Consectetur efficitur sed eros iaculis urna leo in lacus varius. Fames scelerisque luctus ornare, amet inceptos tellus faucibus. Fringilla dignissim feugiat potenti est arcu aenean risus iaculis. Pharetra nibh proin praesent accumsan adipiscing curae adipiscing. Habitant dictum mi finibus fermentum; donec vitae finibus rhoncus! Netus mauris mus donec donec pulvinar vel lobortis suspendisse. Bibendum nostra elementum tellus cursus eleifend, phasellus est. Conubia bibendum tristique luctus in odio.
+
+Magnis molestie mattis viverra pretium ipsum suspendisse. Etiam penatibus varius egestas nostra sit praesent cras. Class sed porta torquent parturient phasellus facilisis vehicula nibh. Suspendisse semper porttitor adipiscing justo consectetur phasellus elit est nisi. Ultrices consectetur interdum integer ridiculus venenatis lacinia purus. Imperdiet pharetra ut proin ullamcorper proin maximus. Gravida molestie lorem nibh tortor in fusce quam. Sociosqu finibus suscipit elit lobortis ut. Ornare nibh ridiculus posuere vivamus sagittis duis quis. Vehicula vestibulum viverra fames, ultrices consectetur magna facilisis consectetur dolor.",
                           icon = icon("fire"),
                           tabs = list(
                    tabEntry("Tab 1",textInput("nor1","Enter name"), "Content for 1"),
                    tabEntry("Tab 2",actionButton("nor1","Try click"), "sample")
                  )),
                  card.pro("Another something", width=6, header.bg = "blue", alert.text = "Going up", colorbtn = FALSE, editbtn = FALSE),
-                 card.pro("Box 3", width=6, header.bg = "red", collapsed = TRUE, sortable = FALSE)
+                 card.pro("Box 3", "boom",width=6, header.bg = "red", collapsed = TRUE, sortable = FALSE),
+                 card.pro("Box 4", "boom",width=8, header.bg = "red", sidebar = div("My name is obi",actionButton("gg","sdsd")))
                )
 
 
@@ -33,7 +42,7 @@ ui <- fluidPage(
         mainPanel(
            plotOutput("distPlot"),
            HTML("
-                 <section id='widget-grid' class=''>
+                 <section id='cardpro-widget-grid' class=''>
 
 					<!-- row -->
 					<div class='row'>

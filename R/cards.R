@@ -106,46 +106,38 @@
 #'
 #' @export
 card.pro <- function(title, ..., collapsed = FALSE, width = 12, tabs = NULL, icon = NULL, add.header.content = NULL,
-                     togglebtn = TRUE, editbtn = TRUE, expandbtn = TRUE, colorbtn = TRUE, removebtn = TRUE, sortable = TRUE,
-                     header.bg = c("white", "green", "greenDark", "greenLight", "purple", "magenta", "pink", "pinkDark", "blueLight", "teal", "blue", "blueDark", "darken", "yellow", "orange", "orangeDark", "red", "redLight"),alert.text = NULL, alert.type = c("warning", "info", "success", "danger")) {
+                     togglebtn = TRUE, editbtn = TRUE, expandbtn = TRUE, colorbtn = TRUE, removebtn = TRUE, sortable = TRUE, sidebar = NULL,
+                     header.bg = c("white", "green", "greenDark", "greenLight", "purple", "magenta", "pink", "pinkDark", "blueLight", "teal", "blue", "blueDark", "darken", "yellow", "orange", "orangeDark", "red", "redLight"), alert.text = NULL, alert.type = c("warning", "info", "success", "danger")) {
   header.bg <- match.arg(header.bg)
 
-  nulltabs = !is.null(tabs)
-  inheritstabs = inherits(tabs,"list") & length(tabs)
-  gnum = quickcode::number(1)
+  nulltabs <- !is.null(tabs)
+  inheritstabs <- inherits(tabs, "list") & length(tabs)
+  gnum <- quickcode::number(1)
 
-  final.div = htmltools::tags$div(
-    id=paste0('wid-id-',gnum),
+  final.div <- htmltools::tags$div(
+    id = paste0("wid-id-", gnum),
     class = "jarviswidget",
     class = paste0("jarviswidget-color-", header.bg),
     htmltools::tags$header(
-
-      htmltools::tags$h2(icon,title),
+      htmltools::tags$h2(icon, title),
       if (!is.null(add.header.content)) htmltools::tags$div(class = "widget-toolbar", add.header.content),
-
-      if(nulltabs){
-        if(inheritstabs){
+      if (nulltabs) {
+        if (inheritstabs) {
           tags$ul(
             class = "nav nav-tabs pull-right in",
-            lapply(quickcode::indexed(tabs), function(l){
-
+            lapply(quickcode::indexed(tabs), function(l) {
               tags$li(
-                class = ifelse(l$key == 1,"active",""),
-                tags$a(`data-toggle` = "tab", href = paste0("#tablend-",l$value$unit,"-",l$key), l$value$title)
+                class = ifelse(l$key == 1, "active", ""),
+                tags$a(`data-toggle` = "tab", href = paste0("#tablend-", l$value$unit, "-", l$key), l$value$title)
               )
-            }
-            )
+            })
           )
         }
-
       }
-
-
-
-
     ),
     # main body
     tags$div(
+      class = "no-padding",
       tags$div(
         class = "jarviswidget-editbox",
         tags$div(
@@ -153,40 +145,44 @@ card.pro <- function(title, ..., collapsed = FALSE, width = 12, tabs = NULL, ico
           tags$input(type = "text")
         )
       ),
-      if(!is.null(alert.text)){
+      if (!is.null(alert.text)) {
         htmltools::tags$div(
-          class=paste0('alert alert-',alert.type,' fade in'), style = "border-radius: 0!important;",
-          htmltools::tags$button(class='close', `data-dismiss`='alert',"×"),
+          class = paste0("alert alert-", alert.type, " fade in"), style = "border-radius: 0!important;border-width: 1px 0;border-color: #ccc;",
+          htmltools::tags$button(class = "close", `data-dismiss` = "alert", "×"),
           alert.text
         )
-      }
-      ,
+      },
       tags$div(
-        class = "widget-body",
-
-        ...,
-        if(nulltabs){
-          if(inheritstabs){
+        class = "widget-body widget-hide-overflow",
+        if (!is.null(sidebar)) {
+          htmltools::tags$div(
+            id = "chat-container",
+            htmltools::tags$span(class = "chat-list-open-close", tags$i(class = "fa fa-cog")),
+            htmltools::tags$div(class = "chat-list-body custom-scroll padding-10", sidebar)
+          )
+        },
+        tags$div(class = "padding-15", ...),
+        if (nulltabs) {
+          if (inheritstabs) {
             tags$div(
               id = "myTabContent", class = "tab-content",
-              lapply(quickcode::indexed(tabs), function(l){
-                tags$div(class = ifelse(l$key == 1,"tab-pane fade active in padding-10 no-padding-bottom","tab-pane fade"), id = paste0("tablend-",l$value$unit,"-",l$key), l$value$content)
+              lapply(quickcode::indexed(tabs), function(l) {
+                tags$div(class = ifelse(l$key == 1, "tab-pane fade active in padding-10 no-padding-bottom", "tab-pane fade"), id = paste0("tablend-", l$value$unit, "-", l$key), tags$div(class = "padding-15", l$value$content))
               })
             )
           }
-
         }
       )
     )
   )
 
-  if (!togglebtn) final.div$attribs$`data-widget-togglebutton` = "false"
-  if (!editbtn) final.div$attribs$`data-widget-editbutton` = "false"
-  if (!expandbtn) final.div$attribs$`data-widget-fullscreenbutton` = "false"
-  if (!colorbtn) final.div$attribs$`data-widget-colorbutton` = "false"
-  if (!removebtn) final.div$attribs$`data-widget-deletebutton` = "false"
-  if (collapsed) final.div$attribs$`data-widget-collapsed` ="true"
-  if (!sortable) final.div$attribs$`data-widget-sortable` = "true"
+  if (!togglebtn) final.div$attribs$`data-widget-togglebutton` <- "false"
+  if (!editbtn) final.div$attribs$`data-widget-editbutton` <- "false"
+  if (!expandbtn) final.div$attribs$`data-widget-fullscreenbutton` <- "false"
+  if (!colorbtn) final.div$attribs$`data-widget-colorbutton` <- "false"
+  if (!removebtn) final.div$attribs$`data-widget-deletebutton` <- "false"
+  if (collapsed) final.div$attribs$`data-widget-collapsed` <- "true"
+  if (!sortable) final.div$attribs$`data-widget-sortable` <- "true"
 
   htmltools::tags$article(
     tags$span(style = "display:none", shiny::icon("comments")),
