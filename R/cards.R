@@ -105,7 +105,7 @@
 #' }
 #'
 #' @export
-card.pro <- function(title, ..., collapsed = FALSE, width = 12, tabs = NULL, icon = NULL, add.header.content = NULL,
+card.pro <- function(title, ..., collapsed = FALSE, width = 12, tabs = NULL, icon = NULL, add.header.content = NULL, footer = "Here is the footer",
                      togglebtn = TRUE, editbtn = TRUE, expandbtn = TRUE, colorbtn = TRUE, removebtn = TRUE, sortable = TRUE, sidebar = NULL,
                      header.bg = c("white", "green", "greenDark", "greenLight", "purple", "magenta", "pink", "pinkDark", "blueLight", "teal", "blue", "blueDark", "darken", "yellow", "orange", "orangeDark", "red", "redLight"), alert.text = NULL, alert.type = c("warning", "info", "success", "danger")) {
   header.bg <- match.arg(header.bg)
@@ -157,7 +157,7 @@ card.pro <- function(title, ..., collapsed = FALSE, width = 12, tabs = NULL, ico
         if (!is.null(sidebar)) {
           htmltools::tags$div(
             id = "chat-container",
-            htmltools::tags$span(class = "chat-list-open-close", tags$i(class = "fa fa-cog")),
+            htmltools::tags$span(class = "chat-list-open-close", style="padding-top: 7px;", tags$i(class = "fa fa-cog")),
             htmltools::tags$div(class = "chat-list-body custom-scroll padding-10", sidebar)
           )
         },
@@ -172,7 +172,10 @@ card.pro <- function(title, ..., collapsed = FALSE, width = 12, tabs = NULL, ico
             )
           }
         }
-      )
+      ),
+      if(!is.null(footer)){
+      tags$div(class="chat-footer",footer)
+      }
     )
   )
 
@@ -185,7 +188,7 @@ card.pro <- function(title, ..., collapsed = FALSE, width = 12, tabs = NULL, ico
   if (!sortable) final.div$attribs$`data-widget-sortable` <- "true"
 
   htmltools::tags$article(
-    tags$span(style = "display:none", shiny::icon("comments")),
+    tags$span(style = "display:none", shiny::icon("fire")),
     class = paste0("col-12 col-md-", width),
     final.div
   )
