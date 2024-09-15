@@ -30,6 +30,8 @@ A list of files to be inserted in the header of a page
 Use the package scripts and stylesheets in a page
 }
 \examples{
+\dontrun{
 use.cardpro()
 use.cardpro(theme="a",jqueryui = T, fontawesome = F)
+}
 }

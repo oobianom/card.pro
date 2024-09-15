@@ -1,5 +1,6 @@
 # card.pro: Lightweight and highly customizable card component for shiny
 
+![](https://cardpro.rpkg.net/assets/image5.jpg)
 ![](https://cardpro.rpkg.net/assets/image4.jpg)
 
 This highly customizable _card.pro()_ component provides a flexible and extensible content container with multiple variants and options. It allows shiny app developers to display content in an organized and uniform manner in the form of cards. 
@@ -28,9 +29,22 @@ ui <- fluidPage(
   
   # add card
   moveable(
-    card.pro("History something","A random content"),
-    card.pro("Card B","cONTENT 2", width = 4),
-    card.pro("Card C","cONTENT 3", width = 8, header.bg = "red")
+    card.pro("History something",title = "A random content"),
+    card.pro("Card B","cONTENT 2", title = width = 4),
+    card.pro("Card C","cONTENT 3", width = 8, header.bg = "red"),
+    
+    card.pro(
+      "Lorem ipsum odor amet.",
+      title = "Box 1",
+      width = 12,
+      icon = icon("fire"),
+      tabs = list(
+        tabEntry("Tab 1",
+                 textInput("nor1", "Enter name"), "Content for 1"),
+        tabEntry("Tab 2",
+                 actionButton("nor1", "Try click"), "sample")
+      )
+    )
   )
   
 )

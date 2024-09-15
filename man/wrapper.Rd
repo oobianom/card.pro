@@ -21,6 +21,6 @@ a container for other containers
 Create a wrapper div for pannels
 }
 \examples{
-wrapper(altPanel("hello"), mainPanel("test"))
-wrapper(mainPanel("hello"), shiny::column(width = 2, "test"))
+wrapper(altPanel("hello"), shiny::mainPanel("test"))
+wrapper(shiny::mainPanel("hello"), shiny::column(width = 2, "test"))
 }

@@ -286,12 +286,12 @@ altPanel <- function(..., width = 6, border = FALSE, shadow = FALSE) {
 #' @return a container for other containers
 #'
 #' @examples
-#' wrapper(altPanel("hello"), mainPanel("test"))
-#' wrapper(mainPanel("hello"), shiny::column(width = 2, "test"))
+#' wrapper(altPanel("hello"), shiny::mainPanel("test"))
+#' wrapper(shiny::mainPanel("hello"), shiny::column(width = 2, "test"))
 #' @export
 #'
 
 wrapper <- function(..., bg = c("default", "primary", "secondary", "warning", "info", "danger", "success")) {
   bg <- match.arg(bg)
-  htmltools::tags$div(class = "row wrapper", class = paste0("bg-", bg), ...)
+  htmltools::tags$div(class = "xwrapper", class = paste0("bg-", bg), ...)
 }
