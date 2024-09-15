@@ -63,8 +63,6 @@ card.pro(
 \item{alert.text}{Enter text for the alert portion. Leave as NULL to exclude the alert}
 
 \item{alert.type}{Indicate the type of alert to include, choices are "warning", "info", "success", "danger"}
-
-\item{bg.fade}{If \code{TRUE}, the background will be faded if a background exists}
 }
 \value{
 HTML code of the container with a class called card.pro that holds the items

@@ -5,7 +5,6 @@
 #' @param ... The elements to include within the body of the card
 #' @param title The text to display in the header title
 #' @param collapsed If \code{TRUE}, the card is collapsed. The default is \code{FALSE}
-#' @param bg.fade If \code{TRUE}, the background will be faded if a background exists
 #' @param width Select a width from 1 to 12 to indicate the size of the card
 #' @param header.bg Header background color style
 #' @param alert.text Enter text for the alert portion. Leave as NULL to exclude the alert
@@ -146,7 +145,7 @@ card.pro <- function(..., title,  collapsed = FALSE, width = 12, tabs = NULL, ic
       if (!is.null(alert.text)) {
         htmltools::tags$div(
           class = paste0("alert alert-", alert.type, " fade in"), style = "border-radius: 0!important;border-width: 1px 0;border-color: #ccc;",
-          htmltools::tags$button(class = "close", `data-dismiss` = "alert", "×"),
+          htmltools::tags$button(class = "close", `data-dismiss` = "alert", "x"),
           alert.text
         )
       },
