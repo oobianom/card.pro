@@ -1,29 +1,36 @@
-#' Generate a flexible and extensible content container
+#' Generate a flexible and extensible card container
 #'
-#' Widely used Bootstrap feature with improvements to allow collapse, minimize and closing
+#' Widely used card component from Bootstrap with improvements to improve utility
 #'
 #' @param ... The elements to include within the body of the card
 #' @param title The text to display in the header title
 #' @param collapsed If \code{TRUE}, the card is collapsed. The default is \code{FALSE}
 #' @param bg.fade If \code{TRUE}, the background will be faded if a background exists
 #' @param width Select a width from 1 to 12 to indicate the size of the card
-#' @param header.bg Header background color style, choices 1 to 11
+#' @param header.bg Header background color style
 #' @param alert.text Enter text for the alert portion. Leave as NULL to exclude the alert
-#' @param alert.bg Indicate the type of alert to include, choices are "primary", "warning", "secondary", "info", "success", "danger"
-#' @param toolbar The default is NULL, which means all toolbar will be displayed use this to set what toolbar to show.
-#' @param header If \code{FALSE}, the header will be excluded
-#' @param draggable If \code{FALSE}, the card will not be draggable
-#' @param id unique card id
+#' @param alert.type Indicate the type of alert to include, choices are "warning", "info", "success", "danger"
+#' @param tabs optional. A list containing tabs items, see example
+#' @param icon Header icon e.g. shiny::icon('fire')
+#' @param xtra.header.content additional header content e.g. "Hi"
+#' @param footer Footer content if any
+#' @param togglebtn show toggle button
+#' @param editbtn show header title edit button
+#' @param expandbtn show card expand button
+#' @param colorbtn show header color chooser
+#' @param removebtn show card closer button
+#' @param sortable If \code{FALSE}, the card will not be draggable
+#' @param sidebar optional. include side bar content
 #'
 #' @note For more information on the features of the card, visit the examples section of the help documentation
-#' @return HTML code of the container with a class called card that holds the items
+#' @return HTML code of the container with a class called card.pro that holds the items
 #'
 #' @examples
 #'
 #' # Example 1
 #' if (interactive()) {
 #'   library(shiny)
-#'   library(nextGenShinyApps)
+#'   library(card.pro)
 #'
 #'   shiny::shinyApp(
 #'     ui = fluidPage(
@@ -33,7 +40,7 @@
 #'       header = titlePanel(left = "Card Ex2"),
 #'       wrapper(
 #'         altPanel(
-#'           card(
+#'           card.pro(
 #'             title = "Standard card",
 #'             collapsed = TRUE,
 #'             alert.text = "An alert2 for the content",
@@ -65,14 +72,11 @@
 #' # Example 2
 #' if (interactive()) {
 #'   library(shiny)
-#'   library(nextGenShinyApps)
+#'   library(card.pro)
 #'
 #'   shiny::shinyApp(
 #'     ui = fluidPage(
-#'       style = "8",
-#'       custom.bg.color = "#d9d9d9",
-#'       sidebar = NULL,
-#'       header = titlePanel(left = "Card Ex1"),
+#'     titlePanel(left = "Card Ex1"),
 #'       wrapper(
 #'         altPanel(
 #'           width = 12,
@@ -82,17 +86,11 @@
 #'             shiny::h3("Sample text"),
 #'             "Lorem ipsum dolor sit a"
 #'           ),
-#'           card(
+#'           card.pro(
 #'             title = "Standard card",
 #'             collapsed = TRUE,
 #'             alert.text = "An alert2 for the content",
-#'             alert.bg = "warning",
-#'             toolbar = list(
-#'               collapse = TRUE,
-#'               maximize = TRUE,
-#'               close = FALSE,
-#'               menu = TRUE
-#'             ),
+#'             alert.type = "warning",
 #'             shiny::h3("Sample text"),
 #'             "Lorem ipsum dolor sit a"
 #'           )
@@ -105,7 +103,7 @@
 #' }
 #'
 #' @export
-card.pro <- function(title, ..., collapsed = FALSE, width = 12, tabs = NULL, icon = NULL, add.header.content = NULL, footer = "Here is the footer",
+card.pro <- function(..., title,  collapsed = FALSE, width = 12, tabs = NULL, icon = NULL, xtra.header.content = NULL, footer = NULL,
                      togglebtn = TRUE, editbtn = TRUE, expandbtn = TRUE, colorbtn = TRUE, removebtn = TRUE, sortable = TRUE, sidebar = NULL,
                      header.bg = c("white", "green", "greenDark", "greenLight", "purple", "magenta", "pink", "pinkDark", "blueLight", "teal", "blue", "blueDark", "darken", "yellow", "orange", "orangeDark", "red", "redLight"), alert.text = NULL, alert.type = c("warning", "info", "success", "danger")) {
   header.bg <- match.arg(header.bg)
@@ -120,15 +118,15 @@ card.pro <- function(title, ..., collapsed = FALSE, width = 12, tabs = NULL, ico
     class = paste0("jarviswidget-color-", header.bg),
     htmltools::tags$header(
       htmltools::tags$h2(icon, title),
-      if (!is.null(add.header.content)) htmltools::tags$div(class = "widget-toolbar", add.header.content),
+      if (!is.null(xtra.header.content)) htmltools::tags$div(class = "widget-toolbar", xtra.header.content),
       if (nulltabs) {
         if (inheritstabs) {
-          tags$ul(
+          htmltools::tags$ul(
             class = "nav nav-tabs pull-right in",
             lapply(quickcode::indexed(tabs), function(l) {
-              tags$li(
+              htmltools::tags$li(
                 class = ifelse(l$key == 1, "active", ""),
-                tags$a(`data-toggle` = "tab", href = paste0("#tablend-", l$value$unit, "-", l$key), l$value$title)
+                htmltools::tags$a(`data-toggle` = "tab", href = paste0("#tablend-", l$value$unit, "-", l$key), l$value$title)
               )
             })
           )
@@ -136,13 +134,13 @@ card.pro <- function(title, ..., collapsed = FALSE, width = 12, tabs = NULL, ico
       }
     ),
     # main body
-    tags$div(
+    htmltools::tags$div(
       class = "no-padding",
-      tags$div(
+      htmltools::tags$div(
         class = "jarviswidget-editbox",
-        tags$div(
-          tags$label("Title"),
-          tags$input(type = "text")
+        htmltools::tags$div(
+          htmltools::tags$label("Title"),
+          htmltools::tags$input(type = "text")
         )
       ),
       if (!is.null(alert.text)) {
@@ -152,29 +150,29 @@ card.pro <- function(title, ..., collapsed = FALSE, width = 12, tabs = NULL, ico
           alert.text
         )
       },
-      tags$div(
+      htmltools::tags$div(
         class = "widget-body widget-hide-overflow",
         if (!is.null(sidebar)) {
           htmltools::tags$div(
             id = "chat-container",
-            htmltools::tags$span(class = "chat-list-open-close", style="padding-top: 7px;", tags$i(class = "fa fa-cog")),
+            htmltools::tags$span(class = "chat-list-open-close", style="padding-top: 7px;", htmltools::tags$i(class = "fa fa-cog")),
             htmltools::tags$div(class = "chat-list-body custom-scroll padding-10", sidebar)
           )
         },
-        tags$div(class = "padding-15", ...),
+        htmltools::tags$div(class = "padding-15", ...),
         if (nulltabs) {
           if (inheritstabs) {
-            tags$div(
+            htmltools::tags$div(
               id = "myTabContent", class = "tab-content",
               lapply(quickcode::indexed(tabs), function(l) {
-                tags$div(class = ifelse(l$key == 1, "tab-pane fade active in padding-10 no-padding-bottom", "tab-pane fade"), id = paste0("tablend-", l$value$unit, "-", l$key), tags$div(class = "padding-15", l$value$content))
+                htmltools::tags$div(class = ifelse(l$key == 1, "tab-pane fade active in padding-10 no-padding-bottom", "tab-pane fade"), id = paste0("tablend-", l$value$unit, "-", l$key), htmltools::tags$div(class = "padding-15", l$value$content))
               })
             )
           }
         }
       ),
       if(!is.null(footer)){
-      tags$div(class="chat-footer",footer)
+      htmltools::tags$div(class="chat-footer padding-top-10",footer)
       }
     )
   )
@@ -188,7 +186,7 @@ card.pro <- function(title, ..., collapsed = FALSE, width = 12, tabs = NULL, ico
   if (!sortable) final.div$attribs$`data-widget-sortable` <- "true"
 
   htmltools::tags$article(
-    tags$span(style = "display:none", shiny::icon("fire")),
+    htmltools::tags$span(style = "display:none", shiny::icon("fire")),
     class = paste0("col-12 col-md-", width),
     final.div
   )
@@ -206,8 +204,8 @@ card.pro <- function(title, ..., collapsed = FALSE, width = 12, tabs = NULL, ico
 #'
 #' @examples
 #' moveable(
-#'   div("A"),
-#'   div("B")
+#'   htmltools::tags$div("A"),
+#'   htmltools::tags$div("B")
 #' )
 #' @export
 
@@ -266,7 +264,7 @@ primePanel <- function(..., width = 8, border = FALSE, shadow = FALSE) {
 #' @export
 
 altPanel <- function(..., width = 6, border = FALSE, shadow = FALSE) {
-  htmltools::div(
+  htmltools::tags$div(
     class = paste0("col-12 col-md-", width),
     class = ifelse(border, "border", ""),
     class = ifelse(shadow, "shadow", ""),
@@ -295,5 +293,5 @@ altPanel <- function(..., width = 6, border = FALSE, shadow = FALSE) {
 
 wrapper <- function(..., bg = c("default", "primary", "secondary", "warning", "info", "danger", "success")) {
   bg <- match.arg(bg)
-  htmltools::div(class = "row wrapper", class = paste0("bg-", bg), ...)
+  htmltools::tags$div(class = "row wrapper", class = paste0("bg-", bg), ...)
 }

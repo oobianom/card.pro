@@ -20,7 +20,7 @@ For more information on the features of a sortable grid, visit the examples sect
 }
 \examples{
 moveable(
-  div("A"),
-  div("B")
+  htmltools::tags$div("A"),
+  htmltools::tags$div("B")
 )
 }

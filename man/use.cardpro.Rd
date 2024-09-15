@@ -5,10 +5,11 @@
 \title{Include stylesheets and scripts}
 \usage{
 use.cardpro(
+  theme = letters[1:5],
   template = "bundle",
   jquery = FALSE,
   jqueryui = TRUE,
-  fontawesome = TRUE
+  fontawesome = FALSE
 )
 }
 \arguments{
@@ -27,5 +28,6 @@ A list of files to be inserted in the header of a page
 Use the package scripts and stylesheets in a page
 }
 \examples{
-use.cardpro('core')
+use.cardpro()
+use.cardpro(theme="a",jqueryui = T, fontawesome = F)
 }

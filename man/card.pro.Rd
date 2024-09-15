@@ -2,27 +2,29 @@
 % Please edit documentation in R/cards.R
 \name{card.pro}
 \alias{card.pro}
-\title{Generate a flexible and extensible content container}
+\title{Generate a flexible and extensible card container}
 \usage{
 card.pro(
   ...,
-  title = "Standard Card",
+  title,
   collapsed = FALSE,
   width = 12,
-  alert.text = NULL,
-  add.header.content = NULL,
   tabs = NULL,
+  icon = NULL,
+  xtra.header.content = NULL,
+  footer = NULL,
   togglebtn = TRUE,
   editbtn = TRUE,
   expandbtn = TRUE,
   colorbtn = TRUE,
   removebtn = TRUE,
-  custombtn = TRUE,
-  collapsebtn = TRUE,
   sortable = TRUE,
+  sidebar = NULL,
   header.bg = c("white", "green", "greenDark", "greenLight", "purple", "magenta", "pink",
     "pinkDark", "blueLight", "teal", "blue", "blueDark", "darken", "yellow", "orange",
-    "orangeDark", "red", "redLight")
+    "orangeDark", "red", "redLight"),
+  alert.text = NULL,
+  alert.type = c("warning", "info", "success", "danger")
 )
 }
 \arguments{
@@ -34,27 +36,41 @@ card.pro(
 
 \item{width}{Select a width from 1 to 12 to indicate the size of the card}
 
+\item{tabs}{optional. A list containing tabs items, see example}
+
+\item{icon}{Header icon e.g. shiny::icon('fire')}
+
+\item{xtra.header.content}{additional header content e.g. "Hi"}
+
+\item{footer}{Footer content if any}
+
+\item{togglebtn}{show toggle button}
+
+\item{editbtn}{show header title edit button}
+
+\item{expandbtn}{show card expand button}
+
+\item{colorbtn}{show header color chooser}
+
+\item{removebtn}{show card closer button}
+
+\item{sortable}{If \code{FALSE}, the card will not be draggable}
+
+\item{sidebar}{optional. include side bar content}
+
+\item{header.bg}{Header background color style}
+
 \item{alert.text}{Enter text for the alert portion. Leave as NULL to exclude the alert}
 
-\item{header.bg}{Header background color style, choices 1 to 11}
+\item{alert.type}{Indicate the type of alert to include, choices are "warning", "info", "success", "danger"}
 
 \item{bg.fade}{If \code{TRUE}, the background will be faded if a background exists}
-
-\item{alert.bg}{Indicate the type of alert to include, choices are "primary", "warning", "secondary", "info", "success", "danger"}
-
-\item{toolbar}{The default is NULL, which means all toolbar will be displayed use this to set what toolbar to show.}
-
-\item{header}{If \code{FALSE}, the header will be excluded}
-
-\item{draggable}{If \code{FALSE}, the card will not be draggable}
-
-\item{id}{unique card id}
 }
 \value{
-HTML code of the container with a class called card that holds the items
+HTML code of the container with a class called card.pro that holds the items
 }
 \description{
-Widely used Bootstrap feature with improvements to allow collapse, minimize and closing
+Widely used card component from Bootstrap with improvements to improve utility
 }
 \note{
 For more information on the features of the card, visit the examples section of the help documentation
@@ -64,7 +80,7 @@ For more information on the features of the card, visit the examples section of 
 # Example 1
 if (interactive()) {
   library(shiny)
-  library(nextGenShinyApps)
+  library(card.pro)
 
   shiny::shinyApp(
     ui = fluidPage(
@@ -74,7 +90,7 @@ if (interactive()) {
       header = titlePanel(left = "Card Ex2"),
       wrapper(
         altPanel(
-          card(
+          card.pro(
             title = "Standard card",
             collapsed = TRUE,
             alert.text = "An alert2 for the content",
@@ -106,14 +122,11 @@ if (interactive()) {
 # Example 2
 if (interactive()) {
   library(shiny)
-  library(nextGenShinyApps)
+  library(card.pro)
 
   shiny::shinyApp(
     ui = fluidPage(
-      style = "8",
-      custom.bg.color = "#d9d9d9",
-      sidebar = NULL,
-      header = titlePanel(left = "Card Ex1"),
+    titlePanel(left = "Card Ex1"),
       wrapper(
         altPanel(
           width = 12,
@@ -123,17 +136,11 @@ if (interactive()) {
             shiny::h3("Sample text"),
             "Lorem ipsum dolor sit a"
           ),
-          card(
+          card.pro(
             title = "Standard card",
             collapsed = TRUE,
             alert.text = "An alert2 for the content",
-            alert.bg = "warning",
-            toolbar = list(
-              collapse = TRUE,
-              maximize = TRUE,
-              close = FALSE,
-              menu = TRUE
-            ),
+            alert.type = "warning",
             shiny::h3("Sample text"),
             "Lorem ipsum dolor sit a"
           )

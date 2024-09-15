@@ -1,12 +1,12 @@
 Package: card.pro
 Type: Package
-Title: Lightweight Modern & Responsive Card Component for 'shiny'.
+Title: Lightweight Modern & Responsive Card Component for 'shiny'
 Version: 2.1.0
 Authors@R: c(
     person("Obinna", "Obianom", email = "idonshayo@gmail.com", role = c("aut", "cre"))
     )
 Maintainer: Obinna Obianom <idonshayo@gmail.com>
-Description: Responsive HTML card essentials for shiny dashboard.
+Description: Responsive and highly customizable HTML card essentials for shiny dashboard. This card component in Bootstrap provides a flexible and extensible content container with multiple variants and options for build robust apps e.g for machine learning projects.
 License: MIT + file LICENSE
 URL: https://cardpro.rpkg.net
 BugReports: https://github.com/oobianom/card.pro/issues

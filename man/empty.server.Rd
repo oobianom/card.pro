@@ -23,7 +23,7 @@ For use in simple shiny apps not requiring server functions
 if(interactive()){
   library(shiny)
   library(card.pro)
-  ui = fluidPage()
+  ui = fluidPage("Obi Obianom")
   shinyApp(ui = ui, server = empty.server)
 }
 }
