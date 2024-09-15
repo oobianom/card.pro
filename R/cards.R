@@ -110,6 +110,8 @@ card.pro <- function(..., title = "Standard Card", collapsed = FALSE, width = 12
                      header.bg = c("white", "green", "greenDark", "greenLight", "purple", "magenta", "pink", "pinkDark", "blueLight", "teal", "blue", "blueDark", "darken", "yellow", "orange", "orangeDark", "red", "redLight")) {
   header.bg <- match.arg(header.bg)
 
+  nulltabs = !is.null(tabs)
+  inheritstabs = inherits(tabs,"list") & length(tabs)
   gnum = quickcode::number(1)
 
   htmltools::tags$article(
@@ -132,14 +134,14 @@ card.pro <- function(..., title = "Standard Card", collapsed = FALSE, width = 12
         htmltools::tags$h2(title),
         if (!is.null(add.header.content)) htmltools::tags$div(class = "widget-toolbar", add.header.content),
 
-        if(!is.null(tabs)){
-          if(inherits(tabs,"list") & length(tabs)){
+        if(nulltabs){
+          if(inheritstabs){
             tags$ul(
           class = "nav nav-tabs pull-right in",
           lapply(quickcode::indexed(names(tabs)), function(l){
 
             tags$li(
-              class = "active",
+              class = ifelse(l$key == 1,"active",""),
               tags$a(`data-toggle` = "tab", href = paste0("#tablend-",gnum,"-",l$key), l$value)
             )
           }
@@ -165,12 +167,17 @@ card.pro <- function(..., title = "Standard Card", collapsed = FALSE, width = 12
         tags$div(
           class = "widget-body",
           ...,
+          if(nulltabs){
+            if(inheritstabs){
           tags$div(
             id = "myTabContent", class = "tab-content",
-            tags$div(class = "tab-pane fade active in padding-10 no-padding-bottom", id = "ss1", "Content 1"),
-            tags$div(class = "tab-pane fade", id = "ss2", "Content 2"),
-            tags$div(class = "tab-pane fade", id = "ss3", "Content 3")
+            lapply(quickcode::indexed(tabs), function(l){
+              tags$div(class = ifelse(l$key == 1,"tab-pane fade active in padding-10 no-padding-bottom","tab-pane fade"), id = paste0("tablend-",gnum,"-",l$key), l$value)
+            })
           )
+            }
+
+          }
         )
       )
     )
