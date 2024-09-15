@@ -11,6 +11,7 @@ card.pro(
   width = 12,
   alert.text = NULL,
   add.header.content = NULL,
+  tabs = NULL,
   togglebtn = TRUE,
   editbtn = TRUE,
   expandbtn = TRUE,

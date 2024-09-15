@@ -80,5 +80,46 @@ template.loc <- function(template = "bundle"){
 }
 
 
+#' Empty server function
+#'
+#' For use in simple shiny apps not requiring server functions
+#'
+#' @param input the input object
+#' @param output the output object
+#' @param session the session object
+#'
+#' @return Empty server function
+#' @examples
+#' if(interactive()){
+#'   library(shiny)
+#'   library(card.pro)
+#'   ui = fluidPage()
+#'   shinyApp(ui = ui, server = empty.server)
+#' }
+#' @export
+#'
+empty.server <- function(input, output, session) {}
 
 
+
+#' Create a tab panel item
+#'
+#' Create a tab panel item that is enclosed by a list
+#'
+#' @param title title of the tab
+#' @param ... content of the tab
+#'
+#' @return An list containing the title and content of a tab
+#'
+#' @examples
+#' if (interactive()) {
+#' tabEntry("Summary", "Convallis aesus.")
+#' tabEntry("Summary", "nextGenShinyApps.")
+#' }
+#'
+#' @export
+#'
+#'
+tabEntry <- function(title, ...) {
+  list(unit = quickcode::number(1,max.digits = 4), title = title, content = htmltools::div(...))
+}
