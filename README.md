@@ -19,14 +19,22 @@ library(card.pro)
 
 
 ui <- fluidPage(
-
+  
+  titlePanel("Advanced Card: Expand, Edit, Rearrange and Refresh"),
+  
+  use.cardpro(theme = "b"), # import scripts
+  
+  # add card
+  moveable(
+    card.pro("History something","A random content"),
+    card.pro("Card B","cONTENT 2", width = 4),
+    card.pro("Card C","cONTENT 3", width = 8, header.bg = "red")
+  )
+  
 )
 
-server <- function(input, output, session) {}
-
-shinyApp(ui = ui, server = \())
+shinyApp(ui = ui, server = empty.server)
 
 ```
 
-{\(x) x + 1}()
 

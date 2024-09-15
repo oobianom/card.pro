@@ -3,12 +3,9 @@ library(card.pro)
 
 # Define UI for application that draws a histogram
 ui <- fluidPage(
-  HTML('<script src="http://ajax.googleapis.com/ajax/libs/jqueryui/1.10.3/jquery-ui.min.js"></script>
-       '),
-    use.cardpro(jqueryui = F, fontawesome = F),
+    use.cardpro(theme="a"),
     # Application title
     titlePanel("Old Faithful Geyser Data"),
-    icon("broom"),
     # Sidebar with a slider input for number of bins
     sidebarLayout(
       altPanel(width = 8,
@@ -18,10 +15,15 @@ ui <- fluidPage(
                            max = 50,
                            value = 30)
                ,moveable(
-                 card.pro("History something",tabs = list(
-                   "home"= "sample"
+                 card.pro("History something",
+                          "what is got",
+                          icon = icon("fire"),
+                          tabs = list(
+                   tabEntry("Tab 1",textInput("nor1","Enter name"), "Content for 1"),
+                   tabEntry("Tab 2",actionButton("nor1","Try click"), "sample")
                  )),
-                 card.pro("Another something", width=6)
+                 card.pro("Another something", width=6, header.bg = "blue", alert.text = "Going up", colorbtn = FALSE, editbtn = FALSE),
+                 card.pro("Box 3", width=6, header.bg = "red", collapsed = TRUE, sortable = FALSE)
                )
 
 

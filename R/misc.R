@@ -25,23 +25,26 @@ row <- function(...) {
 #'
 #' @return A list of files to be inserted in the header of a page
 #' @examples
-#' use.cardpro('core')
+#' use.cardpro()
+#' use.cardpro(theme="a",jqueryui = T, fontawesome = F)
 #' @export
 #'
-use.cardpro <- function(template = "bundle", jquery = FALSE, jqueryui = TRUE, fontawesome = TRUE){
+use.cardpro <- function(theme = letters[1:5], template = "bundle", jquery = FALSE, jqueryui = TRUE, fontawesome = TRUE){
   p.v = 2.1
   j = ju = fa = NULL
   if(jquery)j = "opt/jquery-3.7.1.min.js"
-  if(jqueryui)ju = "opt/jquery-ui.min.js"
-  if(fontawesome)fa = "opt/font-awesome.min.css"
-  icon("cog")
+  if(jqueryui)ju = "opt/bjquery-ui.min.js"
+  theme = match.arg(theme)
   list(
+    tags$script(paste0("document.body.className = document.body.className+' smart-style-",switch (theme,
+      a = "1';",b = "6';",c = "2';",d = "3';",e = "4';"
+    ))),
+    tags$link(href=ifelse(fontawesome,"https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.6.0/css/fontawesome.min.css","")),
   htmltools::htmlDependency(
     .packageName, p.v,
     src = template.loc(template),
     script = c(j,ju,paste0("req/",list.files(template.loc(file.path(template,"req")),pattern = ".js$"))),
-    stylesheet = c(fa,paste0("req/",list.files(template.loc(file.path(template,"req")),pattern = ".css$"))),
-    all_files = TRUE
+    stylesheet = c(paste0("req/",list.files(template.loc(file.path(template,"req")),pattern = ".css$")))
   ))
 }
 
@@ -93,7 +96,7 @@ template.loc <- function(template = "bundle"){
 #' if(interactive()){
 #'   library(shiny)
 #'   library(card.pro)
-#'   ui = fluidPage()
+#'   ui = fluidPage("Obi Obianom")
 #'   shinyApp(ui = ui, server = empty.server)
 #' }
 #' @export

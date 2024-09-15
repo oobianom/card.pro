@@ -105,82 +105,93 @@
 #' }
 #'
 #' @export
-card.pro <- function(..., title = "Standard Card", collapsed = FALSE, width = 12, alert.text = NULL, add.header.content = NULL, tabs = NULL,
-                     togglebtn = TRUE, editbtn = TRUE, expandbtn = TRUE, colorbtn = TRUE, removebtn = TRUE, custombtn = TRUE, collapsebtn = TRUE, sortable = TRUE,
-                     header.bg = c("white", "green", "greenDark", "greenLight", "purple", "magenta", "pink", "pinkDark", "blueLight", "teal", "blue", "blueDark", "darken", "yellow", "orange", "orangeDark", "red", "redLight")) {
+card.pro <- function(title, ..., collapsed = FALSE, width = 12, tabs = NULL, icon = NULL, add.header.content = NULL,
+                     togglebtn = TRUE, editbtn = TRUE, expandbtn = TRUE, colorbtn = TRUE, removebtn = TRUE, sortable = TRUE,
+                     header.bg = c("white", "green", "greenDark", "greenLight", "purple", "magenta", "pink", "pinkDark", "blueLight", "teal", "blue", "blueDark", "darken", "yellow", "orange", "orangeDark", "red", "redLight"),alert.text = NULL, alert.type = c("warning", "info", "success", "danger")) {
   header.bg <- match.arg(header.bg)
 
   nulltabs = !is.null(tabs)
   inheritstabs = inherits(tabs,"list") & length(tabs)
   gnum = quickcode::number(1)
 
-  htmltools::tags$article(
-    tags$span(style = "display:none", shiny::icon("comments")),
-    class = paste0("col-12 col-md-", width),
-    htmltools::tags$div(
-      id=paste0('wid-id-',gnum),
-      class = "jarviswidget",
-      class = paste0("jarviswidget-color-", header.bg),
-      if (!togglebtn) `data-widget-togglebutton` <- "false",
-      if (!editbtn) `data-widget-editbutton` <- "false",
-      if (!expandbtn) `data-widget-fullscreenbutton` <- "false",
-      if (!colorbtn) `data-widget-colorbutton` <- "false",
-      if (!removebtn) `data-widget-deletebutton` <- "false",
-      if (!custombtn) `data-widget-custombutton` <- "false",
-      if (!collapsebtn) `data-widget-collapsed` <- "false",
-      if (!sortable) `data-widget-sortable` <- "false",
-      htmltools::tags$header(
-        htmltools::tags$span(tags$i(class = "fa fa-clock-o")),
-        htmltools::tags$h2(title),
-        if (!is.null(add.header.content)) htmltools::tags$div(class = "widget-toolbar", add.header.content),
+  final.div = htmltools::tags$div(
+    id=paste0('wid-id-',gnum),
+    class = "jarviswidget",
+    class = paste0("jarviswidget-color-", header.bg),
+    htmltools::tags$header(
 
+      htmltools::tags$h2(icon,title),
+      if (!is.null(add.header.content)) htmltools::tags$div(class = "widget-toolbar", add.header.content),
+
+      if(nulltabs){
+        if(inheritstabs){
+          tags$ul(
+            class = "nav nav-tabs pull-right in",
+            lapply(quickcode::indexed(tabs), function(l){
+
+              tags$li(
+                class = ifelse(l$key == 1,"active",""),
+                tags$a(`data-toggle` = "tab", href = paste0("#tablend-",l$value$unit,"-",l$key), l$value$title)
+              )
+            }
+            )
+          )
+        }
+
+      }
+
+
+
+
+    ),
+    # main body
+    tags$div(
+      tags$div(
+        class = "jarviswidget-editbox",
+        tags$div(
+          tags$label("Title"),
+          tags$input(type = "text")
+        )
+      ),
+      if(!is.null(alert.text)){
+        htmltools::tags$div(
+          class=paste0('alert alert-',alert.type,' fade in'), style = "border-radius: 0!important;",
+          htmltools::tags$button(class='close', `data-dismiss`='alert',"×"),
+          alert.text
+        )
+      }
+      ,
+      tags$div(
+        class = "widget-body",
+
+        ...,
         if(nulltabs){
           if(inheritstabs){
-            tags$ul(
-          class = "nav nav-tabs pull-right in",
-          lapply(quickcode::indexed(names(tabs)), function(l){
-
-            tags$li(
-              class = ifelse(l$key == 1,"active",""),
-              tags$a(`data-toggle` = "tab", href = paste0("#tablend-",gnum,"-",l$key), l$value)
+            tags$div(
+              id = "myTabContent", class = "tab-content",
+              lapply(quickcode::indexed(tabs), function(l){
+                tags$div(class = ifelse(l$key == 1,"tab-pane fade active in padding-10 no-padding-bottom","tab-pane fade"), id = paste0("tablend-",l$value$unit,"-",l$key), l$value$content)
+              })
             )
-          }
-          )
-        )
           }
 
         }
-
-
-
-
-      ),
-      # main body
-      tags$div(
-        tags$div(
-          class = "jarviswidget-editbox",
-          tags$div(
-            tags$label("Title"),
-            tags$input(type = "text")
-          )
-        ),
-        tags$div(
-          class = "widget-body",
-          ...,
-          if(nulltabs){
-            if(inheritstabs){
-          tags$div(
-            id = "myTabContent", class = "tab-content",
-            lapply(quickcode::indexed(tabs), function(l){
-              tags$div(class = ifelse(l$key == 1,"tab-pane fade active in padding-10 no-padding-bottom","tab-pane fade"), id = paste0("tablend-",gnum,"-",l$key), l$value)
-            })
-          )
-            }
-
-          }
-        )
       )
     )
+  )
+
+  if (!togglebtn) final.div$attribs$`data-widget-togglebutton` = "false"
+  if (!editbtn) final.div$attribs$`data-widget-editbutton` = "false"
+  if (!expandbtn) final.div$attribs$`data-widget-fullscreenbutton` = "false"
+  if (!colorbtn) final.div$attribs$`data-widget-colorbutton` = "false"
+  if (!removebtn) final.div$attribs$`data-widget-deletebutton` = "false"
+  if (collapsed) final.div$attribs$`data-widget-collapsed` ="true"
+  if (!sortable) final.div$attribs$`data-widget-sortable` = "true"
+
+  htmltools::tags$article(
+    tags$span(style = "display:none", shiny::icon("comments")),
+    class = paste0("col-12 col-md-", width),
+    final.div
   )
 }
 
@@ -202,7 +213,7 @@ card.pro <- function(..., title = "Standard Card", collapsed = FALSE, width = 12
 #' @export
 
 moveable <- function(...) {
-  shiny::tags$section(id = "widget-grid", shiny::div(class = "row", ...))
+  shiny::tags$section(id = "cardpro-widget-grid", shiny::div(class = "row", ...))
 }
 
 
