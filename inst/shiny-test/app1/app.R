@@ -3,7 +3,7 @@ library(card.pro)
 
 # Define UI for application that draws a histogram
 ui <- fluidPage(
-    use.cardpro(theme="b"),
+    use.cardpro(theme="a"),
     # Application title
     titlePanel("Old Faithful Geyser Data"),
     # Sidebar with a slider input for number of bins
@@ -29,7 +29,7 @@ Magnis molestie mattis viverra pretium ipsum suspendisse. Etiam penatibus varius
                           tabs = list(
                    tabEntry("Tab 1",textInput("nor1","Enter name"), "Content for 1"),
                    tabEntry("Tab 2",actionButton("nor1","Try click"), "sample")
-                 )),
+                 ), sidebar = div("My name is obi",actionButton("gg","sdsd"))),
                  card.pro("Another something", width=6, header.bg = "blue", alert.text = "Going up", colorbtn = FALSE, editbtn = FALSE),
                  card.pro("Box 3", "boom",width=6, header.bg = "red", collapsed = TRUE, sortable = FALSE),
                  card.pro("Box 4", "boom",width=8, header.bg = "red", sidebar = div("My name is obi",actionButton("gg","sdsd")))
