@@ -40,8 +40,8 @@ library(card.pro)
 ```
 
 ## Combine the power of two key functions
-![](https://cardpro.rpkg.net/assets/image1.png)
-![](https://cardpro.rpkg.net/assets/image3.png)
+![](https://cardpro.rpkg.net/assets/image1.jpg)
+![](https://cardpro.rpkg.net/assets/image3.jpg)
 
 ## Example code to get started
 

@@ -6,20 +6,22 @@
 \usage{
 use.cardpro(
   theme = letters[1:5],
-  template = "bundle",
   jquery = FALSE,
   jqueryui = TRUE,
-  fontawesome = FALSE
+  fontawesome = FALSE,
+  template = "bundle"
 )
 }
 \arguments{
-\item{template}{The template type}
+\item{theme}{The template type}
 
 \item{jquery}{option. logical. include jquery}
 
 \item{jqueryui}{option. logical. include jquery UI}
 
 \item{fontawesome}{option. logical. include fontawesome}
+
+\item{template}{template folder}
 }
 \value{
 A list of files to be inserted in the header of a page

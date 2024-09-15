@@ -13,7 +13,6 @@ BugReports: https://github.com/oobianom/card.pro/issues
 Depends: 
     R (> 3.6)
 Imports: 
-    utils,
     shiny,
     quickcode,
     htmltools

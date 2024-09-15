@@ -10,7 +10,7 @@
 #' @export
 #'
 row <- function(...) {
-  div(class = "row", ...)
+  htmltools::tags$div(class = "row", ...)
 }
 
 
@@ -18,7 +18,8 @@ row <- function(...) {
 #'
 #' Use the package scripts and stylesheets in a page
 #'
-#' @param template The template type
+#' @param theme The template type
+#' @param template template folder
 #' @param jquery option. logical. include jquery
 #' @param jqueryui option. logical. include jquery UI
 #' @param fontawesome option. logical. include fontawesome
@@ -29,24 +30,53 @@ row <- function(...) {
 #' use.cardpro(theme="a",jqueryui = T, fontawesome = F)
 #' @export
 #'
-use.cardpro <- function(theme = letters[1:5], template = "bundle", jquery = FALSE, jqueryui = TRUE, fontawesome = FALSE){
-  p.v = 2.1
-  j = ju = fa = NULL
-  if(jquery)j = "opt/jquery-3.7.1.min.js"
-  if(jqueryui)ju = "opt/bjquery-ui.min.js"
-  theme = match.arg(theme)
-  list(
-    tags$script(paste0("document.body.className = document.body.className+' smart-style-",switch (theme,
-      a = "1';",b = "6';",c = "2';",d = "3';",e = "4';"
-    ))),
-    tags$link(href=ifelse(fontawesome,"https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.6.0/css/fontawesome.min.css","")),
-  htmltools::htmlDependency(
-    .packageName, p.v,
-    src = template.loc(template),
-    script = c(j,ju,paste0("req/",list.files(template.loc(file.path(template,"req")),pattern = ".js$"))),
-    stylesheet = c(paste0("req/",list.files(template.loc(file.path(template,"req")),pattern = ".css$")))
-  ))
-}
+use.cardpro <-
+  function(theme = letters[1:5],
+           jquery = FALSE,
+           jqueryui = TRUE,
+           fontawesome = FALSE,
+           template = "bundle") {
+    p.v = 2.1
+    j = ju = fa = NULL
+    if (jquery)
+      j = "opt/jquery-3.7.1.min.js"
+    if (jqueryui)
+      ju = "opt/bjquery-ui.min.js"
+    theme = match.arg(theme)
+    list(
+      htmltools::tags$script(
+        paste0(
+          "document.body.className = document.body.className+' smart-style-",
+          switch (
+            theme,
+            a = "1';",
+            b = "6';",
+            c = "2';",
+            d = "3';",
+            e = "4';"
+          )
+        )
+      ),
+      htmltools::tags$link(
+        href = ifelse(
+          fontawesome,
+          "https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.6.0/css/fontawesome.min.css",
+          ""
+        )
+      ),
+      htmltools::htmlDependency(
+        .packageName,
+        p.v,
+        src = template.loc(template),
+        script = c(j, ju, paste0(
+          "req/", list.files(template.loc(file.path(template, "req")), pattern = ".js$")
+        )),
+        stylesheet = c(paste0(
+          "req/", list.files(template.loc(file.path(template, "req")), pattern = ".css$")
+        ))
+      )
+    )
+  }
 
 #' Nav tag
 #'
@@ -62,8 +92,21 @@ use.cardpro <- function(theme = letters[1:5], template = "bundle", jquery = FALS
 #' nav('sample','id1','sample','some content')
 #' @export
 #'
-nav <- function(class, id = NULL, role = NULL, ...) {
-  shiny::HTML(paste0("<nav class='", class, "' id='", id, "' role='", role, "'>", ..., "</nav>"))
+nav <- function(class,
+                id = NULL,
+                role = NULL,
+                ...) {
+  shiny::HTML(paste0(
+    "<nav class='",
+    class,
+    "' id='",
+    id,
+    "' role='",
+    role,
+    "'>",
+    ...,
+    "</nav>"
+  ))
 }
 
 
@@ -78,8 +121,8 @@ nav <- function(class, id = NULL, role = NULL, ...) {
 #' template.loc('bundle')
 #' @export
 #'
-template.loc <- function(template = "bundle"){
-  file.path(find.package(package = "card.pro"),template)
+template.loc <- function(template = "bundle") {
+  file.path(find.package(package = "card.pro"), template)
 }
 
 
@@ -101,7 +144,8 @@ template.loc <- function(template = "bundle"){
 #' }
 #' @export
 #'
-empty.server <- function(input, output, session) {}
+empty.server <- function(input, output, session) {
+}
 
 
 
@@ -124,5 +168,9 @@ empty.server <- function(input, output, session) {}
 #'
 #'
 tabEntry <- function(title, ...) {
-  list(unit = quickcode::number(1,max.digits = 4), title = title, content = htmltools::div(...))
+  list(
+    unit = quickcode::number(1, max.digits = 4),
+    title = title,
+    content = htmltools::div(...)
+  )
 }
