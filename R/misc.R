@@ -60,7 +60,7 @@ use.cardpro <- function(template = "bundle", jquery = FALSE, jqueryui = TRUE, fo
 #' @export
 #'
 nav <- function(class, id = NULL, role = NULL, ...) {
-  HTML(paste0("<nav class='", class, "' id='", id, "' role='", role, "'>", ..., "</nav>"))
+  shiny::HTML(paste0("<nav class='", class, "' id='", id, "' role='", role, "'>", ..., "</nav>"))
 }
 
 
@@ -81,7 +81,7 @@ template.loc <- function(template = "bundle"){
 
 
 
-rand.num <- function(num){
+rand.num <- function(num = 1){
   sample(1:10000, num)
 }
 rand.sc13 <-

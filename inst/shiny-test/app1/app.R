@@ -17,10 +17,10 @@ ui <- fluidPage(
                            min = 1,
                            max = 50,
                            value = 30)
-               # ,moveable(
-               #   card.pro("History something"),
-               #   card.pro("Another something", width=6)
-               # )
+               ,moveable(
+                 card.pro("History something"),
+                 card.pro("Another something", width=6)
+               )
 
 
       ),

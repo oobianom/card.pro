@@ -115,6 +115,7 @@ card.pro <- function(..., title = "Standard Card", collapsed = FALSE, width = 12
     tags$span(style = "display:none", shiny::icon("comments")),
     class = paste0("col-12 col-md-", width),
     htmltools::tags$div(
+      id=paste0('wid-id-',rand.num()),
       class = "jarviswidget",
       class = paste0("jarviswidget-color-", header.bg),
       if (!togglebtn) `data-widget-togglebutton` <- "false",
