@@ -29,7 +29,7 @@ row <- function(...) {
 #' use.cardpro(theme="a",jqueryui = T, fontawesome = F)
 #' @export
 #'
-use.cardpro <- function(theme = letters[1:5], template = "bundle", jquery = FALSE, jqueryui = TRUE, fontawesome = TRUE){
+use.cardpro <- function(theme = letters[1:5], template = "bundle", jquery = FALSE, jqueryui = TRUE, fontawesome = FALSE){
   p.v = 2.1
   j = ju = fa = NULL
   if(jquery)j = "opt/jquery-3.7.1.min.js"
