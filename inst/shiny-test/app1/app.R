@@ -18,7 +18,9 @@ ui <- fluidPage(
                            max = 50,
                            value = 30)
                ,moveable(
-                 card.pro("History something"),
+                 card.pro("History something",tabs = list(
+                   "home"= "sample"
+                 )),
                  card.pro("Another something", width=6)
                )
 

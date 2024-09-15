@@ -14,7 +14,9 @@ Depends:
     R (> 3.6)
 Imports: 
     utils,
-    shiny
+    shiny,
+    quickcode,
+    htmltools
 Suggests: 
     rmarkdown,
     knitr,

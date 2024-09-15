@@ -105,17 +105,18 @@
 #' }
 #'
 #' @export
-card.pro <- function(..., title = "Standard Card", collapsed = FALSE, width = 12, alert.text = NULL, add.header.content = NULL,
+card.pro <- function(..., title = "Standard Card", collapsed = FALSE, width = 12, alert.text = NULL, add.header.content = NULL, tabs = NULL,
                      togglebtn = TRUE, editbtn = TRUE, expandbtn = TRUE, colorbtn = TRUE, removebtn = TRUE, custombtn = TRUE, collapsebtn = TRUE, sortable = TRUE,
                      header.bg = c("white", "green", "greenDark", "greenLight", "purple", "magenta", "pink", "pinkDark", "blueLight", "teal", "blue", "blueDark", "darken", "yellow", "orange", "orangeDark", "red", "redLight")) {
   header.bg <- match.arg(header.bg)
 
+  gnum = quickcode::number(1)
 
   htmltools::tags$article(
     tags$span(style = "display:none", shiny::icon("comments")),
     class = paste0("col-12 col-md-", width),
     htmltools::tags$div(
-      id=paste0('wid-id-',rand.num()),
+      id=paste0('wid-id-',gnum),
       class = "jarviswidget",
       class = paste0("jarviswidget-color-", header.bg),
       if (!togglebtn) `data-widget-togglebutton` <- "false",
@@ -130,19 +131,27 @@ card.pro <- function(..., title = "Standard Card", collapsed = FALSE, width = 12
         htmltools::tags$span(tags$i(class = "fa fa-clock-o")),
         htmltools::tags$h2(title),
         if (!is.null(add.header.content)) htmltools::tags$div(class = "widget-toolbar", add.header.content),
-        tags$ul(
+
+        if(!is.null(tabs)){
+          if(inherits(tabs,"list") & length(tabs)){
+            tags$ul(
           class = "nav nav-tabs pull-right in",
-          tags$li(
-            class = "active",
-            tags$a(`data-toggle` = "tab", href = "#ss1", "Tab 1")
-          ),
-          tags$li(
-            tags$a(`data-toggle` = "tab", href = "#ss2", "Tab 2")
-          ),
-          tags$li(
-            tags$a(`data-toggle` = "tab", href = "#ss3", "Tab 3")
+          lapply(quickcode::indexed(names(tabs)), function(l){
+
+            tags$li(
+              class = "active",
+              tags$a(`data-toggle` = "tab", href = paste0("#tablend-",gnum,"-",l$key), l$value)
+            )
+          }
           )
         )
+          }
+
+        }
+
+
+
+
       ),
       # main body
       tags$div(

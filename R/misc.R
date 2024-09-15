@@ -81,9 +81,4 @@ template.loc <- function(template = "bundle"){
 
 
 
-rand.num <- function(num = 1){
-  sample(1:10000, num)
-}
-rand.sc13 <-
-  as.character(sample(1:13,13))
 
