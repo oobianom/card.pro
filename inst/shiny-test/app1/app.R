@@ -8,18 +8,22 @@ ui <- fluidPage(
     use.cardpro(jqueryui = F, fontawesome = F),
     # Application title
     titlePanel("Old Faithful Geyser Data"),
-
+    icon("broom"),
     # Sidebar with a slider input for number of bins
     sidebarLayout(
-        sidebarPanel(
-            sliderInput("bins",
-                        icon("font"),
-                        min = 1,
-                        max = 50,
-                        value = 30)
+      altPanel(width = 8,
+               sliderInput("bins",
+                           "Choose",
+                           min = 1,
+                           max = 50,
+                           value = 30)
+               # ,moveable(
+               #   card.pro("History something"),
+               #   card.pro("Another something", width=6)
+               # )
 
 
-        ),
+      ),
 
         # Show a plot of the generated distribution
         mainPanel(
@@ -79,7 +83,7 @@ ui <- fluidPage(
 
 									<div class='widget-body'>
 										<!-- content -->
-										<div id='myTabContent' class='tab-content'>
+										<div id='myTabContent2' class='tab-content'>
 											<div class='tab-pane fade active in padding-10 no-padding-bottom' id='s1'>
 												Tab 1
 											</div>

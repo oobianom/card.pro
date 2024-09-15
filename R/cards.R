@@ -30,27 +30,31 @@
 #'       style = "4",
 #'       custom.bg.color = "lightblue",
 #'       sidebar = NULL,
-#'       header = titlePanel(left="Card Ex2"),
+#'       header = titlePanel(left = "Card Ex2"),
 #'       wrapper(
 #'         altPanel(
-#'                  card(
-#'                    title = "Standard card",
-#'                    collapsed = TRUE,
-#'                    alert.text = "An alert2 for the content",
-#'                    alert.bg = "warning",
-#'                    toolbar = list(collapse = TRUE,
-#'                                   maximize = TRUE,
-#'                                   close = FALSE,
-#'                                   menu = TRUE),
-#'                    shiny::h3("Sample text"),
-#'                    "Lorem ipsum dolor sit a"
-#'                  )),
+#'           card(
+#'             title = "Standard card",
+#'             collapsed = TRUE,
+#'             alert.text = "An alert2 for the content",
+#'             alert.bg = "warning",
+#'             toolbar = list(
+#'               collapse = TRUE,
+#'               maximize = TRUE,
+#'               close = FALSE,
+#'               menu = TRUE
+#'             ),
+#'             shiny::h3("Sample text"),
+#'             "Lorem ipsum dolor sit a"
+#'           )
+#'         ),
 #'         mainPanel(
 #'           card(
 #'             title = "Standard card 2",
 #'             shiny::h1("Sample text"),
 #'             "Lorem ipsum dolor sit a"
-#'           ))
+#'           )
+#'         )
 #'       )
 #'     ),
 #'     server = function(input, output) {
@@ -68,27 +72,31 @@
 #'       style = "8",
 #'       custom.bg.color = "#d9d9d9",
 #'       sidebar = NULL,
-#'       header = titlePanel(left="Card Ex1"),
+#'       header = titlePanel(left = "Card Ex1"),
 #'       wrapper(
-#'         altPanel(width = 12,
-#'                  card(
-#'                    title = "Standard card",
-#'                    alert.text = "An alert1 for the content",
-#'                    shiny::h3("Sample text"),
-#'                    "Lorem ipsum dolor sit a"
-#'                  ),
-#'                  card(
-#'                    title = "Standard card",
-#'                    collapsed = TRUE,
-#'                    alert.text = "An alert2 for the content",
-#'                    alert.bg = "warning",
-#'                    toolbar = list(collapse = TRUE,
-#'                                   maximize = TRUE,
-#'                                   close = FALSE,
-#'                                   menu = TRUE),
-#'                    shiny::h3("Sample text"),
-#'                    "Lorem ipsum dolor sit a"
-#'                  ))
+#'         altPanel(
+#'           width = 12,
+#'           card(
+#'             title = "Standard card",
+#'             alert.text = "An alert1 for the content",
+#'             shiny::h3("Sample text"),
+#'             "Lorem ipsum dolor sit a"
+#'           ),
+#'           card(
+#'             title = "Standard card",
+#'             collapsed = TRUE,
+#'             alert.text = "An alert2 for the content",
+#'             alert.bg = "warning",
+#'             toolbar = list(
+#'               collapse = TRUE,
+#'               maximize = TRUE,
+#'               close = FALSE,
+#'               menu = TRUE
+#'             ),
+#'             shiny::h3("Sample text"),
+#'             "Lorem ipsum dolor sit a"
+#'           )
+#'         )
 #'       )
 #'     ),
 #'     server = function(input, output) {
@@ -96,103 +104,71 @@
 #'   )
 #' }
 #'
-#'
 #' @export
-
-card.pro <- function(...,title = "Standard Card",  collapsed = FALSE, bg.fade = TRUE, width = 12, header.bg = letters[1:13], alert.text = NULL, alert.bg = c("primary", "warning", "secondary", "info", "success", "danger"), toolbar = NULL, header = TRUE, draggable = TRUE, id = NULL) {
-  add.collapsed.01 <- ifelse(collapsed, " panel-collapsed ", "")
-  alert.bg <- match.arg(alert.bg)
-  header.bg <- match.arg(header.bg)[1]
-  header.bg.add <- switch (header.bg,
-                           "a" = "",
-                           "b" = "bg-primary-700 bg-success-gradient",
-                           "c" = "bg-primary-500 bg-info-gradient",
-                           "d" = "bg-primary-600 bg-primary-gradient",
-                           "e" = "bg-info-600 bg-primray-gradient",
-                           "f" = "bg-info-600 bg-info-gradient",
-                           "g" = "bg-info-700 bg-success-gradient",
-                           "h" = "bg-success-900 bg-info-gradient",
-                           "i" = "bg-success-700 bg-primary-gradient",
-                           "j" = "bg-success-600 bg-success-gradient",
-                           "k" = "bg-danger-900 bg-info-gradient",
-                           "l" = "bg-fusion-400 bg-fusion-gradient",
-                           "m" = "bg-faded"
-  )
-  if (collapsed) {
-    add.collapsed.01 <- " panel-collapsed"
-    add.collapsed.02 <- " collapse"
-  } else {
-    add.collapsed.01 <- ""
-    add.collapsed.02 <- " collapse show"
-  }
-  bg.fader <- ifelse(bg.fade, " bg-subtlelight-fade ", "")
-  num <- as.integer(Sys.time()) + rand.num(1)
-
-  draggable.class <- ifelse(draggable," panel-sortable","")
-  content.main <- div(
-    id = paste0("box", num),
-    class = paste0("panel",draggable.class, add.collapsed.01),
-    `data-panel-attstyle`= header.bg.add,
-    role = "widget",
-    #ifelse(!exists('.nGSAscripts'),cssjsinclude('core','3'),''),
-    # header
-    if (header) {
-      div(
-        class = paste0("panel-hdr ",header.bg.add),
-        role = "heading",
-        h2(class = "js-get-date ui-sortable-handle", tags$b(title)),
-        div(
-          class = "panel-saving mr-2", style = "display:none",
-          tags$i(class = "fa fa-spinner fa-spin-4x fs-xl")
-        ),
-        setup.toolbar.buttons(toolbar),
-        setup.toolbar.menu(toolbar)
-      )
-    },
+card.pro <- function(..., title = "Standard Card", collapsed = FALSE, width = 12, alert.text = NULL, add.header.content = NULL,
+                     togglebtn = TRUE, editbtn = TRUE, expandbtn = TRUE, colorbtn = TRUE, removebtn = TRUE, custombtn = TRUE, collapsebtn = TRUE, sortable = TRUE,
+                     header.bg = c("white", "green", "greenDark", "greenLight", "purple", "magenta", "pink", "pinkDark", "blueLight", "teal", "blue", "blueDark", "darken", "yellow", "orange", "orangeDark", "red", "redLight")) {
+  header.bg <- match.arg(header.bg)
 
 
-    # alert
-    div(
-      class = paste0("panel-container", add.collapsed.02), role = "content",
-      div(
-        class = "loader",
-        tags$i(class = "fa fa-spinner-third fa-spin-4x fs-xxl")
-      ),
-      if (!is.null(alert.text)) {
-        div(
-          class = "panel-content p-0 mb-g",
-          div(
-            class = paste0("alert alert-", alert.bg, " alert-dismissible fade show border-faded border-left-0 border-right-0 border-top-0 rounded-0 m-0"),
-            role = "alert",
-            tags$button(
-              type = "button", class = "close", `data-dismiss` = "alert", `aria-label` = "Close",
-              tags$span(
-                `aria-hidden` = "true",
-                tags$i(class = "fa fa-times")
-              )
-            ), tags$strong(
-              HTML(alert.text)
-            )
+  htmltools::tags$article(
+    tags$span(style = "display:none", shiny::icon("comments")),
+    class = paste0("col-12 col-md-", width),
+    htmltools::tags$div(
+      class = "jarviswidget",
+      class = paste0("jarviswidget-color-", header.bg),
+      if (!togglebtn) `data-widget-togglebutton` <- "false",
+      if (!editbtn) `data-widget-editbutton` <- "false",
+      if (!expandbtn) `data-widget-fullscreenbutton` <- "false",
+      if (!colorbtn) `data-widget-colorbutton` <- "false",
+      if (!removebtn) `data-widget-deletebutton` <- "false",
+      if (!custombtn) `data-widget-custombutton` <- "false",
+      if (!collapsebtn) `data-widget-collapsed` <- "false",
+      if (!sortable) `data-widget-sortable` <- "false",
+      htmltools::tags$header(
+        htmltools::tags$span(tags$i(class = "fa fa-clock-o")),
+        htmltools::tags$h2(title),
+        if (!is.null(add.header.content)) htmltools::tags$div(class = "widget-toolbar", add.header.content),
+        tags$ul(
+          class = "nav nav-tabs pull-right in",
+          tags$li(
+            class = "active",
+            tags$a(`data-toggle` = "tab", href = "#ss1", "Tab 1")
+          ),
+          tags$li(
+            tags$a(`data-toggle` = "tab", href = "#ss2", "Tab 2")
+          ),
+          tags$li(
+            tags$a(`data-toggle` = "tab", href = "#ss3", "Tab 3")
           )
         )
-      },
-      # body
-      div(
-        class = "panel-content",
-        ...
+      ),
+      # main body
+      tags$div(
+        tags$div(
+          class = "jarviswidget-editbox",
+          tags$div(
+            tags$label("Title"),
+            tags$input(type = "text")
+          )
+        ),
+        tags$div(
+          class = "widget-body",
+          ...,
+          tags$div(
+            id = "myTabContent", class = "tab-content",
+            tags$div(class = "tab-pane fade active in padding-10 no-padding-bottom", id = "ss1", "Content 1"),
+            tags$div(class = "tab-pane fade", id = "ss2", "Content 2"),
+            tags$div(class = "tab-pane fade", id = "ss3", "Content 3")
+          )
+        )
       )
     )
   )
-  if (draggable) {
-    sortablegrid(width = width, content.main, id = id)
-  } else {
-    column(width = width, content.main)
-  }
 }
 
 
-
-#' Generate a sortable grid
+#' Generate a moveable grid
 #'
 #' A grid that holds draggable items
 #'
@@ -202,210 +178,14 @@ card.pro <- function(...,title = "Standard Card",  collapsed = FALSE, bg.fade = 
 #' @return HTML code of a container that allows items within it to be draggable
 #'
 #' @examples
-#'  moveable(
-#'  div("A"),
-#'  div("B")
-#'  )
+#' moveable(
+#'   div("A"),
+#'   div("B")
+#' )
 #' @export
 
 moveable <- function(...) {
-  shiny::div(id = "widget-grid",shiny::div(id = "row",...))
-}
-
-#' Generate toolbar buttons
-#'
-#' Use within a card to display toolbar
-#'
-#' @param ... The list of buttons to display
-#'
-#' @note For more information on the features of a toolbar within a card, visit the examples section of the help documentation
-#' @return HTML code of a container containing items to be inserted in the toolbar
-#'
-#' @examples
-#' \donttest{
-#'  setup.toolbar.buttons(list(maximize=TRUE,collapse=TRUE,close=TRUE))
-#'  }
-#' @export
-setup.toolbar.buttons <- function(...) {
-  show.collapse <- 1
-  show.maximize <- 1
-  show.close <- 1
-
-  if (!is.null(...)) {
-
-    # check if its logical, if so - TRUE or FALSE
-    if (is.logical(...)) {
-      if (!as.logical(...)) {
-        show.collapse <- 0
-        show.maximize <- 0
-        show.close <- 0
-      }
-    } else {
-      if (is.list(...)) {
-        need.0 <- list(collapse = 0, maximize = 0, close = 0)
-        need.1 <- c(...)
-        need <- append(need.1, need.0)
-        if (!as.logical(need$collapse)) show.collapse <- 0
-        if (!as.logical(need$maximize)) show.maximize <- 0
-        if (!as.logical(need$close)) show.close <- 0
-      } else {
-        warning("Must use a list to declare the toolbars needed.")
-      }
-    }
-  }
-  shiny::div(
-    class = "panel-toolbar", role = "menu",
-    if (show.collapse) {
-      tags$a(
-        href = "#", class = "btn btn-panel collapsetool hover-effect-dot js-panel-collapse waves-effect waves-themed",
-        `data-toggle` = "tooltip", `data-offset` = "0,10", `data-original-title` = "Collapse"
-      )
-    },
-    if (show.maximize) {
-      tags$a(
-        href = "#", class = "btn btn-panel maximizetool hover-effect-dot js-panel-fullscreen waves-effect waves-themed",
-        `data-toggle` = "tooltip", `data-offset` = "0,10", `data-original-title` = "Fullscreen"
-      )
-    },
-    if (show.close) {
-      tags$a(
-        href = "#", class = "btn btn-panel closetool hover-effect-dot js-panel-close waves-effect waves-themed",
-        `data-toggle` = "tooltip", `data-offset` = "0,10", `data-original-title` = "Close"
-      )
-    }
-  )
-}
-
-#' Generate toolbar menu
-#'
-#' Use within a card to display menu
-#'
-#' @param ... The list declaring whether to show menu
-#'
-#' @note For more information on the features of a toolbar within a card, visit the examples section of the help documentation
-#' @return HTML code of a container containing menu to be inserted in the toolbar if declared TRUE
-#'
-#' @examples
-#' \donttest{
-#'  setup.toolbar.menu(list(menu=TRUE))
-#'  }
-#' @export
-setup.toolbar.menu <- function(...) {
-  show.menu <- 1
-
-  if (!is.null(...)) {
-
-    # check if its logical, if so - TRUE or FALSE
-    if (is.logical(...)) {
-      if (!as.logical(...)) {
-        show.menu <- 0
-      }
-    } else {
-      if (is.list(...)) {
-        need.0 <- list(menu = 0)
-        need.1 <- c(...)
-        need <- append(need.1, need.0)
-        if (!as.logical(need$menu)) show.menu <- 0
-      } else {
-        warning("Must use a list to declare if the menu is needed.")
-      }
-    }
-  }
-  if (show.menu) {
-    div(
-      class = "panel-toolbar", role = "menu",
-      tags$a(
-        href = "#", class = "btn btn-toolbar-master waves-effect waves-themed",
-        `data-toggle` = "dropdown",
-        tags$i(class = "fa fa-ellipsis-v")
-      ),
-      div(
-        class = "dropdown-menu dropdown-menu-animated dropdown-menu-right p-0",
-        tags$a(
-          href = "#", class = "dropdown-item js-panel-refresh",
-          tags$span(`data-i18n` = "drpdwn.refreshpanel", "Refresh Content")
-        ),
-        tags$a(
-          href = "#", class = "dropdown-item js-panel-locked",
-          tags$span(`data-i18n` = "drpdwn.lockpanel", "Lock Position")
-        ),
-        div(
-          class = "dropdown-multilevel dropdown-multilevel-left",
-          div(class = "dropdown-item", tags$span(`data-i18n` = "drpdwn.panelcolor", "Panel Style")),
-          div(
-            class = "dropdown-menu d-flex flex-wrap", style = "min-width: 9.5rem; width: 9.5rem; padding: 0.5rem",
-            tags$a(
-              href = "#",
-              class = "btn d-inline-block bg-primary-700 bg-success-gradient width-2 height-2 p-0 rounded-0 js-panel-color hover-effect-dot waves-effect waves-themed",
-              `data-panel-setstyle` = "bg-primary-700 bg-success-gradient", style = "margin:1px;"
-            ),
-            tags$a(
-              href = "#",
-              class = "btn d-inline-block bg-primary-500 bg-info-gradient width-2 height-2 p-0 rounded-0 js-panel-color hover-effect-dot waves-effect waves-themed",
-              `data-panel-setstyle` = "bg-primary-500 bg-info-gradient", style = "margin:1px;"
-            ),
-            tags$a(
-              href = "#",
-              class = "btn d-inline-block bg-primary-600 bg-primary-gradient width-2 height-2 p-0 rounded-0 js-panel-color hover-effect-dot waves-effect waves-themed",
-              `data-panel-setstyle` = "bg-primary-600 bg-primary-gradient", style = "margin:1px;"
-            ),
-            tags$a(
-              href = "#",
-              class = "btn d-inline-block bg-info-600 bg-primray-gradient width-2 height-2 p-0 rounded-0 js-panel-color hover-effect-dot waves-effect waves-themed",
-              `data-panel-setstyle` = "bg-info-600 bg-primray-gradient", style = "margin:1px;"
-            ),
-            tags$a(
-              href = "#",
-              class = "btn d-inline-block bg-info-600 bg-info-gradient width-2 height-2 p-0 rounded-0 js-panel-color hover-effect-dot waves-effect waves-themed",
-              `data-panel-setstyle` = "bg-info-600 bg-info-gradient", style = "margin:1px;"
-            ),
-            tags$a(
-              href = "#",
-              class = "btn d-inline-block bg-info-700 bg-success-gradient width-2 height-2 p-0 rounded-0 js-panel-color hover-effect-dot waves-effect waves-themed",
-              `data-panel-setstyle` = "bg-info-700 bg-success-gradient", style = "margin:1px;"
-            ),
-            tags$a(
-              href = "#",
-              class = "btn d-inline-block bg-success-900 bg-info-gradient width-2 height-2 p-0 rounded-0 js-panel-color hover-effect-dot waves-effect waves-themed",
-              `data-panel-setstyle` = "bg-success-900 bg-info-gradient", style = "margin:1px;"
-            ),
-            tags$a(
-              href = "#",
-              class = "btn d-inline-block bg-success-700 bg-primary-gradient width-2 height-2 p-0 rounded-0 js-panel-color hover-effect-dot waves-effect waves-themed",
-              `data-panel-setstyle` = "bg-success-700 bg-primary-gradient", style = "margin:1px;"
-            ),
-            tags$a(
-              href = "#",
-              class = "btn d-inline-block bg-success-600 bg-success-gradient width-2 height-2 p-0 rounded-0 js-panel-color hover-effect-dot waves-effect waves-themed",
-              `data-panel-setstyle` = "bg-success-600 bg-success-gradient", style = "margin:1px;"
-            ),
-            tags$a(
-              href = "#",
-              class = "btn d-inline-block bg-danger-900 bg-info-gradient width-2 height-2 p-0 rounded-0 js-panel-color hover-effect-dot waves-effect waves-themed",
-              `data-panel-setstyle` = "bg-danger-900 bg-info-gradient", style = "margin:1px;"
-            ),
-            tags$a(
-              href = "#",
-              class = "btn d-inline-block bg-fusion-400 bg-fusion-gradient width-2 height-2 p-0 rounded-0 js-panel-color hover-effect-dot waves-effect waves-themed",
-              `data-panel-setstyle` = "bg-fusion-400 bg-fusion-gradient", style = "margin:1px;"
-            ),
-            tags$a(
-              href = "#",
-              class = "btn d-inline-block bg-faded width-2 height-2 p-0 rounded-0 js-panel-color hover-effect-dot waves-effect waves-themed",
-              `data-panel-setstyle` = "bg-faded", style = "margin:1px;"
-            )
-          )
-        ),
-        div(class = "dropdown-divider m-0"),
-        tags$a(
-          href = "#", class = "dropdown-item js-panel-reset",
-          tags$span(`data-i18n` = "drpdwn.resetpanel", "Reset Panel")
-        )
-      )
-    )
-  } else {
-    return(NULL)
-  }
+  shiny::tags$section(id = "widget-grid", shiny::div(class = "row", ...))
 }
 
 
@@ -424,16 +204,18 @@ setup.toolbar.menu <- function(...) {
 #'
 #' @examples
 #' \donttest{
-#'  mainPanel('content 1')
-#'  }
+#' primePanel("content 1")
+#' }
 #' @export
 
-mainPanel <- function(..., width = 8, border=FALSE, shadow=FALSE){
-  shiny::div(class = paste0("col-12 col-md-", width),
-      class = ifelse(border,"border",""),
-      class = ifelse(shadow,"shadow",""),
-      role = "main",
-      ...)
+primePanel <- function(..., width = 8, border = FALSE, shadow = FALSE) {
+  shiny::div(
+    class = paste0("col-12 col-md-", width),
+    class = ifelse(border, "border", ""),
+    class = ifelse(shadow, "shadow", ""),
+    role = "main",
+    ...
+  )
 }
 
 
@@ -452,39 +234,39 @@ mainPanel <- function(..., width = 8, border=FALSE, shadow=FALSE){
 #'
 #' @examples
 #' \donttest{
-#'  altPanel('content 2')
-#'  }
+#' altPanel("content 2")
+#' }
 #' @export
 
-altPanel <- function(..., width = 4, border=FALSE, shadow=FALSE){
-  htmltools::div(class = paste0("col-12 col-md-", width),
-      class = ifelse(border,"border",""),
-      class = ifelse(shadow,"shadow",""),
-      htmltools::tags$form(class = "well",
-                role = "complementary", ...))
+altPanel <- function(..., width = 6, border = FALSE, shadow = FALSE) {
+  htmltools::div(
+    class = paste0("col-12 col-md-", width),
+    class = ifelse(border, "border", ""),
+    class = ifelse(shadow, "shadow", ""),
+    htmltools::tags$form(
+      class = "well",
+      role = "complementary", ...
+    )
+  )
 }
 
 
-#' Container to fit all containers horizontally
+#' A wrapper for panels
 #'
-#' Fit containers horizontally
+#' Create a wrapper div for pannels
 #'
-#' @param ... List of content
-#' @param border Should border be declared for the panel
-#' @param shadow Should a shadow be added to the panel
+#' @param ... div contents
+#' @param bg background color of the wrapper
 #'
-#' @return Creates a a box to fit all boxes within
+#' @return a container for other containers
 #'
 #' @examples
-#' \donttest{
-#'  flexBox(shiny::div("Div 1"),shiny::div("Div 2"),shiny::div("Div 1"))
-#'  }
+#' wrapper(altPanel("hello"), mainPanel("test"))
+#' wrapper(mainPanel("hello"), shiny::column(width = 2, "test"))
 #' @export
-flexBox <- function(..., border = FALSE, shadow = FALSE) {
-  htmltools::div(
-    class = "ngsflexBox d-block d-md-flex",
-    if (border) class <- "border border-secondary",
-    if (shadow) class <- "shadow-md",
-    ...
-  )
+#'
+
+wrapper <- function(..., bg = c("default", "primary", "secondary", "warning", "info", "danger", "success")) {
+  bg <- match.arg(bg)
+  htmltools::div(class = "row wrapper", class = paste0("bg-", bg), ...)
 }
