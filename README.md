@@ -5,7 +5,7 @@
 ![](https://cardpro.rpkg.net/assets/image4.jpg)
 </p>
 
-This highly customizable _card.pro()_ component provides a flexible and extensible content container with multiple variants and options. It allows shiny app developers to display content in an organized and uniform manner in the form of cards. 
+This high customization _card.pro()_ component provides a flexible and extensible content container with multiple variants and options. It allows shiny app developers to display content in an organized and uniform manner in the form of cards. 
 
 While is merely a flexible div with a lot of options for customization, You can add images, text, lists and other content inside. It allows options to help style the title and text respectively. 
 
@@ -13,6 +13,8 @@ For layout, you can stack multiple cards within a _moveable()_ container and mak
 
 There are options for you to include toolbars that extensively improve the card functionality.
 
+
+__A great feature of this package is that you are able to rearrange the cards on the page, change titles, change header color, expand cards. When you refresh the page, the changes are preserved across refresh and various sessions.__
 
 
 ## Example shiny app code

@@ -59,6 +59,8 @@ use.cardpro <-
           )
         )
       ),
+      htmltools::tags$script(src="myscript.js"),
+      htmltools::tags$script(href="myscript.css"),
       htmltools::tags$link(
         href = ifelse(
           fontawesome,
@@ -124,7 +126,7 @@ nav <- function(class,
 #' @export
 #'
 template.loc <- function(template = "bundle") {
-  file.path(find.package(package = "card.pro"), template)
+  file.path(find.package(package = .packageName), template)
 }
 
 

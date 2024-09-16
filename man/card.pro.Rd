@@ -82,38 +82,38 @@ if (interactive()) {
 
   shiny::shinyApp(
     ui = fluidPage(
-      style = "4",
-      custom.bg.color = "lightblue",
-      sidebar = NULL,
-      header = titlePanel(left = "Card Ex2"),
-      wrapper(
-        altPanel(
-          card.pro(
-            title = "Standard card",
-            collapsed = TRUE,
-            alert.text = "An alert2 for the content",
-            alert.bg = "warning",
-            toolbar = list(
-              collapse = TRUE,
-              maximize = TRUE,
-              close = FALSE,
-              menu = TRUE
+      titlePanel("Change customizations.
+      Its preserved across refresh!"),
+      moveable(
+        card.pro(
+          "Lorem ipsum odor amet.",
+          title = "Box 1",
+          icon = icon("fire"),
+          tabs = list(
+            tabEntry(
+              "Tab 1",
+              textInput("nor1", "Enter name"),
+              "Content for 1"
             ),
-            shiny::h3("Sample text"),
-            "Lorem ipsum dolor sit a"
+            tabEntry(
+              "Tab 2",
+              actionButton("nor1", "Try click"),
+              "sample"
+            )
           )
         ),
-        mainPanel(
-          card(
-            title = "Standard card 2",
-            shiny::h1("Sample text"),
-            "Lorem ipsum dolor sit a"
-          )
+        card.pro(
+          "Another something",
+          title = "Box 2",
+          width = 6,
+          header.bg = "blue",
+          alert.text = "Its an alert!",
+          colorbtn = FALSE,
+          editbtn = FALSE
         )
       )
     ),
-    server = function(input, output) {
-    }
+    server = empty.server
   )
 }
 
@@ -124,29 +124,35 @@ if (interactive()) {
 
   shiny::shinyApp(
     ui = fluidPage(
-    titlePanel(left = "Card Ex1"),
+      titlePanel("Change order and refresh"),
       wrapper(
-        altPanel(
-          width = 12,
-          card(
-            title = "Standard card",
-            alert.text = "An alert1 for the content",
-            shiny::h3("Sample text"),
-            "Lorem ipsum dolor sit a"
+        moveable(
+          card.pro(
+            "A plot for test",
+            textInput("test6", "Plot title"),
+            actionButton("test9", "Make plot"),
+            title = "Box 3",
+            width = 6,
+            header.bg = "red",
+            collapsed = TRUE,
+            sortable = FALSE
           ),
           card.pro(
-            title = "Standard card",
-            collapsed = TRUE,
-            alert.text = "An alert2 for the content",
-            alert.type = "warning",
-            shiny::h3("Sample text"),
-            "Lorem ipsum dolor sit a"
+            "Box 4 content",
+            "shinyappstore.com",
+            title = "Box 1",
+            width = 8,
+            header.bg = "red",
+            sidebar = div(
+              "My settings",
+              textInput("test2", "Input change"),
+              actionButton("test3", "Click to save")
+            )
           )
         )
       )
     ),
-    server = function(input, output) {
-    }
+    server = empty.server
   )
 }
 

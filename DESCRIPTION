@@ -6,7 +6,7 @@ Authors@R: c(
     person("Obinna", "Obianom", email = "idonshayo@gmail.com", role = c("aut", "cre"))
     )
 Maintainer: Obinna Obianom <idonshayo@gmail.com>
-Description: Responsive and highly customizable HTML card essentials for shiny dashboard. This card component in Bootstrap provides a flexible and extensible content container with multiple variants and options for build robust apps e.g for machine learning projects.
+Description: Responsive and modern HTML card essentials for shiny dashboard. This card component in Bootstrap provides a flexible and extensible content container with multiple variants and options for build robust apps e.g for graph build or machine learning projects.
 License: MIT + file LICENSE
 URL: https://cardpro.rpkg.net
 BugReports: https://github.com/oobianom/card.pro/issues

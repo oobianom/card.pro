@@ -15,7 +15,9 @@ knitr::opts_chunk$set(
 )
 ```
 
-Advanced tools and styling to allow the creation of the next generation of dashboards and shiny applications.
+Advanced card tools and styling to allow the creation of the next generation of dashboards and shiny applications.
+
+__A great feature of the card.pro package is that you are able to rearrange the cards on the page, change titles, change header color, expand cards. When you refresh the page, the changes are preserved across refresh and various sessions.__
 
 ## Installation and Library Attachment
 
