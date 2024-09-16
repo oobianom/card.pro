@@ -3,6 +3,7 @@
 <p align="center">
 <img src="https://cardpro.rpkg.net/assets/image5.jpg">
 </p>
+
 ![](https://cardpro.rpkg.net/assets/image4.jpg)
 
 This high customization _card.pro()_ component provides a flexible and extensible content container with multiple variants and options. It allows shiny app developers to display content in an organized and uniform manner in the form of cards. 
