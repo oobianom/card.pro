@@ -199,7 +199,7 @@ tabEntry <- function(title, ...) {
 #'
 titlePanel2 <- function(title, rightContent, windowTitle = title) {
   shiny::titlePanel(
-    title = shiny::div(title, shiny::div(class="pull-right",rightContent)),
+    title = shiny::div(title, shiny::div(class="hidden-mobile hidden-tablet pull-right",rightContent)),
     windowTitle = windowTitle
   )
 }
