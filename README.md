@@ -1,7 +1,7 @@
 # card.pro: Lightweight and highly customizable card component for shiny
 
 <p align="center">
-<img src="https://cardpro.rpkg.net/assets/image5.jpg">
+<img src="https://cardpro.rpkg.net/assets/image6.jpg">
 </p>
 
 ![](https://cardpro.rpkg.net/assets/image4.jpg)
