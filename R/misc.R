@@ -178,3 +178,28 @@ tabEntry <- function(title, ...) {
     content = htmltools::div(...)
   )
 }
+
+
+#' Create a title bar
+#'
+#' Create an alternative title bar
+#'
+#' @param title title of the tab
+#' @param rightContent content of the right
+#' @param windowTitle window title
+#'
+#' @return An list containing the title and content of a header
+#'
+#' @examples
+#' if (interactive()) {
+#' titlePanel2("Main title", "Right content | About me")
+#' }
+#'
+#' @export
+#'
+titlePanel2 <- function(title, rightContent, windowTitle = title) {
+  shiny::titlePanel(
+    title = shiny::div(shiny::div(class="pull-left",title), shiny::div(class="pull-right",rightContent)),
+    windowTitle = windowTitle
+  )
+}
