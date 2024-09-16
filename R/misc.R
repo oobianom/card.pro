@@ -26,7 +26,7 @@ row <- function(...) {
 #'
 #' @return A list of files to be inserted in the header of a page
 #' @examples
-#' \dontrun{
+#' if(interactive()){
 #' use.cardpro()
 #' use.cardpro(theme="a",jqueryui = T, fontawesome = F)
 #' }
