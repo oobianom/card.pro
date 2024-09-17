@@ -20,6 +20,7 @@
 #' @param removebtn show card closer button
 #' @param sortable If \code{FALSE}, the card will not be draggable
 #' @param sidebar optional. include side bar content
+#' @param shadow logical. add shadow to the card exterior
 #'
 #' @note For more information on the features of the card, visit the examples section of the help documentation
 #' @return HTML code of the container with a class called card.pro that holds the items
@@ -109,17 +110,17 @@
 #'
 #' @export
 card.pro <- function(..., title,  collapsed = FALSE, width = 12, tabs = NULL, icon = NULL, xtra.header.content = NULL, footer = NULL,
-                     togglebtn = TRUE, editbtn = TRUE, expandbtn = TRUE, colorbtn = TRUE, removebtn = TRUE, sortable = TRUE, sidebar = NULL,
+                     togglebtn = TRUE, editbtn = TRUE, expandbtn = TRUE, colorbtn = TRUE, removebtn = TRUE, sortable = TRUE, sidebar = NULL, shadow = TRUE,
                      header.bg = c("white", "green", "greenDark", "greenLight", "purple", "magenta", "pink", "pinkDark", "blueLight", "teal", "blue", "blueDark", "darken", "yellow", "orange", "orangeDark", "red", "redLight"), alert.text = NULL, alert.type = c("warning", "info", "success", "danger")) {
   header.bg <- match.arg(header.bg)
 
   nulltabs <- !is.null(tabs)
   inheritstabs <- inherits(tabs, "list") & length(tabs)
   gnum <- quickcode::number(1)
-
+  shd <- ifelse(shadow," shadow","")
   final.div <- htmltools::tags$div(
     id = paste0("wid-id-", gnum),
-    class = "jarviswidget",
+    class = paste0("jarviswidget",shd),
     class = paste0("jarviswidget-color-", header.bg),
     htmltools::tags$header(
       htmltools::tags$h2(icon, title),
