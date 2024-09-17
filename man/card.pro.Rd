@@ -20,6 +20,7 @@ card.pro(
   removebtn = TRUE,
   sortable = TRUE,
   sidebar = NULL,
+  shadow = TRUE,
   header.bg = c("white", "green", "greenDark", "greenLight", "purple", "magenta", "pink",
     "pinkDark", "blueLight", "teal", "blue", "blueDark", "darken", "yellow", "orange",
     "orangeDark", "red", "redLight"),
@@ -57,6 +58,8 @@ card.pro(
 \item{sortable}{If \code{FALSE}, the card will not be draggable}
 
 \item{sidebar}{optional. include side bar content}
+
+\item{shadow}{logical. add shadow to the card exterior}
 
 \item{header.bg}{Header background color style}
 
