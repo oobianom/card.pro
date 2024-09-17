@@ -199,6 +199,7 @@ tabEntry <- function(title, ...) {
 #'
 titlePanel2 <- function(title, rightContent, windowTitle = title) {
   shiny::titlePanel(
+    class = "cardpro-titlepanel",
     title = shiny::div(title, shiny::div(class="hidden-mobile hidden-tablet pull-right",rightContent)),
     windowTitle = windowTitle
   )
