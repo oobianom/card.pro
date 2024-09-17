@@ -1,7 +1,7 @@
 Package: card.pro
 Type: Package
 Title: Lightweight Modern & Responsive Card Component for 'shiny'
-Version: 2.1.0
+Version: 2.2.0
 Authors@R: c(
     person("Obinna", "Obianom", email = "idonshayo@gmail.com", role = c("aut", "cre"))
     )
