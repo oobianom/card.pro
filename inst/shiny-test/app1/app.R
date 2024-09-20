@@ -4,7 +4,7 @@ library(card.pro)
 
 ui <- fluidPage(
   use.cardpro(theme = "a"),
-  titlePanel("shinyappstore.com Data"),
+  titlePanel2("shinyappstore.com Data"),
   moveable(
     card.pro(
       "Lorem ipsum odor amet.",
