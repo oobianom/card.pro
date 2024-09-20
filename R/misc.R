@@ -48,7 +48,7 @@ use.cardpro <-
     list(
       htmltools::tags$script(
         paste0(
-          "document.body.className = document.body.className+' smart-style-",
+          "document.body.className = document.body.className+' fixed-page-footer smart-style-",
           switch (
             theme,
             a = "1';",
@@ -216,8 +216,8 @@ titlePanel2 <- function(title, rightContent = NULL, windowTitle = title) {
 #'
 #' @export
 #'
-footerPanel <- function(title, rightContent = NULL) {
-  htmltools::tags$div(class = "page-footer",
+footerPanel <- function(title, rightContent = NULL, bg.col = "#2a2725", text.col = "#f5f5f5") {
+  htmltools::tags$div(class = "page-footer", style = paste0("background:",bg.col,";color: ",text.col),
                         shiny::div(title, shiny::div(class="hidden-mobile hidden-tablet pull-right",rightContent))
   )
 }
