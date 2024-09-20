@@ -180,7 +180,7 @@ tabEntry <- function(title, ...) {
 }
 
 
-#' Create a title bar
+#' Create a title and footer bar
 #'
 #' Create an alternative title bar
 #'
@@ -189,7 +189,7 @@ tabEntry <- function(title, ...) {
 #' @param windowTitle window title
 #'
 #' @return An list containing the title and content of a header
-#'
+#' @rdname header-footer
 #' @examples
 #' if (interactive()) {
 #' titlePanel2("Main title", "Right content | About me")
@@ -197,10 +197,27 @@ tabEntry <- function(title, ...) {
 #'
 #' @export
 #'
-titlePanel2 <- function(title, rightContent, windowTitle = title) {
-  shiny::titlePanel(
-    class = "cardpro-titlepanel",
-    title = shiny::div(title, shiny::div(class="hidden-mobile hidden-tablet pull-right",rightContent)),
-    windowTitle = windowTitle
+titlePanel2 <- function(title, rightContent = NULL, windowTitle = title) {
+  htmltools::tags$div(class = "cardpro-titlepanel",
+    shiny::titlePanel(
+      title = shiny::div(title, shiny::div(class="hidden-mobile hidden-tablet pull-right",rightContent)),
+      windowTitle = windowTitle
+    )
+  )
+}
+
+
+
+#' @rdname header-footer
+#' @examples
+#' if (interactive()) {
+#' footerPanel("Main footer @ 2024. All rights reserved", "Contact us")
+#' }
+#'
+#' @export
+#'
+footerPanel <- function(title, rightContent = NULL) {
+  htmltools::tags$div(class = "page-footer",
+                        shiny::div(title, shiny::div(class="hidden-mobile hidden-tablet pull-right",rightContent))
   )
 }
