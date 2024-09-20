@@ -37,7 +37,10 @@ use.cardpro <-
            jquery = FALSE,
            jqueryui = TRUE,
            fontawesome = FALSE,
-           template = "bundle") {
+           template = "bundle",
+           fix.header = FALSE
+           ) {
+    fxhdr = ifelse(fix.header," fixed-header","")
     p.v = 2.1
     j = ju = fa = NULL
     if (jquery)
@@ -48,7 +51,7 @@ use.cardpro <-
     list(
       htmltools::tags$script(
         paste0(
-          "document.body.className = document.body.className+' fixed-page-footer smart-style-",
+          "document.body.className = document.body.className+'",fxhdr," fixed-page-footer smart-style-",
           switch (
             theme,
             a = "1';",
@@ -187,8 +190,10 @@ tabEntry <- function(title, ...) {
 #' @param title title of the tab
 #' @param rightContent content of the right
 #' @param windowTitle window title
+#' @param bg.col background color
+#' @param text.col text color
 #'
-#' @return An list containing the title and content of a header
+#' @return An list containing the title and content of a header or footer
 #' @rdname header-footer
 #' @examples
 #' if (interactive()) {
@@ -197,10 +202,10 @@ tabEntry <- function(title, ...) {
 #'
 #' @export
 #'
-titlePanel2 <- function(title, rightContent = NULL, windowTitle = title) {
-  htmltools::tags$div(class = "cardpro-titlepanel",
+titlePanel2 <- function(title, rightContent = NULL, windowTitle = title , text.col = "#2a2725", bg.col = "#f5f5f5") {
+  htmltools::tags$header(id ="header", class = "cardpro-titlepanel", style = paste0("min-height: 70px;border-width:0!important;background:",bg.col,";color: ",text.col),
     shiny::titlePanel(
-      title = shiny::div(title, shiny::div(class="hidden-mobile hidden-tablet pull-right",rightContent)),
+      title = shiny::div(style="width: 100vw; padding-left:10px",title, shiny::div(class="hidden-mobile hidden-tablet pull-right",rightContent)),
       windowTitle = windowTitle
     )
   )

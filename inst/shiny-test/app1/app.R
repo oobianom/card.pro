@@ -3,8 +3,9 @@ library(card.pro)
 
 
 ui <- fluidPage(
-  use.cardpro(theme = "a"),
+  use.cardpro(theme = "a", fix.header = TRUE),
   titlePanel2("shinyappstore.com Data"),
+  footerPanel("2024 (c) All rights reserved.", rightContent = tags$a(href="#", "Contact us"), bg.col = "brown"),
   moveable(
     card.pro(
       "Lorem ipsum odor amet.",
@@ -49,7 +50,6 @@ ui <- fluidPage(
       )
     )
   ),
-
   textInput("test2", "Input change"),
   actionButton("test3", "Click to save"),
   textInput("test2", "Input change"),
@@ -62,9 +62,7 @@ Magnis duis congue commodo sodales dictum amet quam. Elementum rhoncus feugiat n
 </p>
 Rutrum tincidunt gravida facilisi; ornare cras nascetur parturient. Auctor accumsan libero nullam facilisi conubia lacinia. Interdum senectus platea dui parturient in. Vivamus elit nunc sociosqu ornare curae enim. Facilisis senectus commodo imperdiet quis platea dolor senectus. Et non felis venenatis nulla neque luctus. Velit ante auctor nostra venenatis, vehicula ipsum volutpat risus. Massa sem mollis metus montes adipiscing eros odio viverra suspendisse. Velit dignissim cubilia neque vehicula lacus nibh sagittis aptent.
 
-Libero fringilla himenaeos quis etiam convallis penatibus pharetra vitae. Mattis habitasse felis feugiat amet eget adipiscing massa pharetra. Ac malesuada consectetur quisque cras penatibus per magnis. Elementum nullam imperdiet nam sagittis rhoncus quisque. Efficitur pulvinar lectus egestas pellentesque eleifend nam inceptos luctus. Consequat nec ad est; vitae felis euismod magnis. Cras posuere nibh sit enim lorem pretium class eros morbi. Maecenas per donec tortor lorem nec vel. Taciti efficitur tempor ligula; nascetur quis aptent."),
-
-  footerPanel("Hellow", rightContent = "Find me", bg.col = "brown")
+Libero fringilla himenaeos quis etiam convallis penatibus pharetra vitae. Mattis habitasse felis feugiat amet eget adipiscing massa pharetra. Ac malesuada consectetur quisque cras penatibus per magnis. Elementum nullam imperdiet nam sagittis rhoncus quisque. Efficitur pulvinar lectus egestas pellentesque eleifend nam inceptos luctus. Consequat nec ad est; vitae felis euismod magnis. Cras posuere nibh sit enim lorem pretium class eros morbi. Maecenas per donec tortor lorem nec vel. Taciti efficitur tempor ligula; nascetur quis aptent.")
 )
 
 # Run the application

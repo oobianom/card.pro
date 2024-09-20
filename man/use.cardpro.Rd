@@ -9,7 +9,8 @@ use.cardpro(
   jquery = FALSE,
   jqueryui = TRUE,
   fontawesome = FALSE,
-  template = "bundle"
+  template = "bundle",
+  fix.header = FALSE
 )
 }
 \arguments{

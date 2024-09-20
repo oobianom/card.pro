@@ -5,9 +5,20 @@
 \alias{footerPanel}
 \title{Create a title and footer bar}
 \usage{
-titlePanel2(title, rightContent = NULL, windowTitle = title)
+titlePanel2(
+  title,
+  rightContent = NULL,
+  windowTitle = title,
+  text.col = "#2a2725",
+  bg.col = "#f5f5f5"
+)
 
-footerPanel(title, rightContent = NULL)
+footerPanel(
+  title,
+  rightContent = NULL,
+  bg.col = "#2a2725",
+  text.col = "#f5f5f5"
+)
 }
 \arguments{
 \item{title}{title of the tab}
@@ -15,9 +26,13 @@ footerPanel(title, rightContent = NULL)
 \item{rightContent}{content of the right}
 
 \item{windowTitle}{window title}
+
+\item{text.col}{text color}
+
+\item{bg.col}{background color}
 }
 \value{
-An list containing the title and content of a header
+An list containing the title and content of a header or footer
 }
 \description{
 Create an alternative title bar
