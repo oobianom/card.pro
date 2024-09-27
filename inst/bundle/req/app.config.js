@@ -194,7 +194,7 @@
 
 
  $(document).ready(function() {
-  $("#header").detach().insertBefore('body>*:first');
+  $("header#header").detach().insertBefore('body>*:first');
 				// DO NOT REMOVE : GLOBAL FUNCTIONS!
 				pageSetUp();
 
