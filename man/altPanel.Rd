@@ -4,7 +4,7 @@
 \alias{altPanel}
 \title{New sidebar panel to display content}
 \usage{
-altPanel(..., width = 6, border = FALSE, shadow = FALSE)
+altPanel(..., width = 4, border = FALSE, shadow = FALSE)
 }
 \arguments{
 \item{...}{List of content}
