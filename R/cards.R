@@ -241,7 +241,7 @@ moveable <- function(...) {
 
 primePanel <- function(..., width = 8, border = FALSE, shadow = FALSE) {
   shiny::div(
-    class = paste0("col-12 col-md-", width),
+    class = paste0("p-0 m-0 col-12 col-md-", width),
     class = ifelse(border, "border", ""),
     class = ifelse(shadow, "shadow", ""),
     role = "main",
