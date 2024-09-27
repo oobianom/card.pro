@@ -117,7 +117,7 @@ card.pro <- function(..., title,  collapsed = FALSE, width = 12, tabs = NULL, ic
   nulltabs <- !is.null(tabs)
   inheritstabs <- inherits(tabs, "list") & length(tabs)
   gnum <- quickcode::number(1)
-  shd <- ifelse(shadow," shadow","")
+  shd <- ifelse(shadow == FALSE,""," shadow")
   final.div <- htmltools::tags$div(
     id = paste0("wid-id-", gnum),
     class = paste0("jarviswidget",shd),
@@ -269,7 +269,7 @@ primePanel <- function(..., width = 8, border = FALSE, shadow = FALSE) {
 #' }
 #' @export
 
-altPanel <- function(..., width = 6, border = FALSE, shadow = FALSE) {
+altPanel <- function(..., width = 4, border = FALSE, shadow = FALSE) {
   htmltools::tags$div(
     class = paste0("col-12 col-md-", width),
     class = ifelse(border, "border", ""),
