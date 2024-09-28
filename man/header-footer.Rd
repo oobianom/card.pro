@@ -10,11 +10,11 @@ titlePanel2(
   rightContent = NULL,
   windowTitle = title,
   text.col = "#2a2725",
-  bg.col = "#f5f5f5"
+  bg.col = "#ffffff"
 )
 
 footerPanel(
-  title,
+  title = shiny::HTML("&copy; 2024"),
   rightContent = NULL,
   bg.col = "#2a2725",
   text.col = "#f5f5f5"
@@ -40,6 +40,7 @@ Create an alternative title bar
 \examples{
 if (interactive()) {
 titlePanel2("Main title", "Right content | About me")
+titlePanel2("Main title", action)
 }
 
 if (interactive()) {
