@@ -6,6 +6,8 @@
 
 ![](https://cardpro.rpkg.net/assets/image4.jpg)
 
+### shiny demo: [https://rpkg.shinyapps.io/cardpro/](https://rpkg.shinyapps.io/cardpro/)
+
 This high customization _card.pro()_ component provides a flexible and extensible content container with multiple variants and options. It allows shiny app developers to display content in an organized and uniform manner in the form of cards. 
 
 While is merely a flexible div with a lot of options for customization, You can add images, text, lists and other content inside. It allows options to help style the title and text respectively. 
