@@ -4,8 +4,8 @@ library(card.pro)
 
 ui <- fluidPage(
   use.cardpro(theme = "a", fix.header = TRUE),
-  titlePanel2("shinyappstore.com Data"),
-  footerPanel("2024 (c) All rights reserved.", rightContent = tags$a(href="#", "Contact us"), bg.col = "brown"),
+  titlePanel2("shinyappstore.com Data", actionButton("aboutus","about us", icon = shiny::icon("question"))),
+  footerPanel(rightContent = tags$a(href="#", "Contact us"), bg.col = "brown"),
   moveable(
     card.pro(
       "Lorem ipsum odor amet.",
