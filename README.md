@@ -32,18 +32,37 @@ ui <- fluidPage(
   
   titlePanel("Advanced Card: Expand, Edit, Rearrange and Refresh"),
   
-  use.cardpro(theme = "b"), # import scripts
+  use.cardpro(theme = "a"), # themes a,b,c,d, or e
   
   # add card
   moveable(
-    card.pro("History something",title = "A random content"),
-    card.pro("Card B","cONTENT 2", title = width = 4),
-    card.pro("Card C","cONTENT 3", width = 8, header.bg = "red"),
+    card.pro("History something",title = "A random content", collapse=TRUE),
+    card.pro("Card B","cONTENT 2", title = "a title", width = 4, header.bg = "darken"),
+    card.pro("Card C",title ="Card 3", width = 8, header.bg = "red"),
+    
+    
+    
+    card.pro(
+      "Hello graph",
+      sidebar = div(
+        "Plot settings",
+        textInput("testy", "Y-axis title", "Concentration"),
+        textInput("testx", "X-axis title", "Time"),
+        textInput("dpi", "Image dpi", "300"),
+        textInput("strp", "Subset", "NA"),
+        actionButton("test3", "Re-graph")
+      ),
+      title = "Card with side bar",
+      width = 6,
+      icon = icon("globe"),
+      header.bg = "blue",
+    ),
+    
     
     card.pro(
       "Lorem ipsum odor amet.",
-      title = "Box 1",
-      width = 12,
+      title = "Card with tabs",
+      width = 6,
       icon = icon("fire"),
       tabs = list(
         tabEntry("Tab 1",
