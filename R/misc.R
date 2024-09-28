@@ -23,6 +23,7 @@ row <- function(...) {
 #' @param jquery option. logical. include jquery
 #' @param jqueryui option. logical. include jquery UI
 #' @param fontawesome option. logical. include fontawesome
+#' @param fix.header logical. fix header if titlePanel2() is used in UI
 #'
 #' @return A list of files to be inserted in the header of a page
 #' @examples
@@ -198,15 +199,15 @@ tabEntry <- function(title, ...) {
 #' @examples
 #' if (interactive()) {
 #' titlePanel2("Main title", "Right content | About me")
+#' titlePanel2("Main title", action)
 #' }
 #'
 #' @export
 #'
-titlePanel2 <- function(title, rightContent = NULL, windowTitle = title , text.col = "#2a2725", bg.col = "#f5f5f5") {
+titlePanel2 <- function(title, rightContent = NULL, windowTitle = title , text.col = "#2a2725", bg.col = "#ffffff") {
   htmltools::tags$header(id ="header", class = "cardpro-titlepanel", style = paste0("min-height: 70px;border-width:0!important;background:",bg.col,";color: ",text.col),
-    shiny::titlePanel(
-      title = shiny::div(style="width: 100vw; padding-left:10px",title, shiny::div(class="hidden-mobile hidden-tablet pull-right",rightContent)),
-      windowTitle = windowTitle
+    shiny::h2(style="width: 100%;padding-left:10px",
+      shiny::div(style="width: 100%; ",title, shiny::div(class="hidden-mobile hidden-tablet pull-right",rightContent))
     )
   )
 }
@@ -221,7 +222,7 @@ titlePanel2 <- function(title, rightContent = NULL, windowTitle = title , text.c
 #'
 #' @export
 #'
-footerPanel <- function(title, rightContent = NULL, bg.col = "#2a2725", text.col = "#f5f5f5") {
+footerPanel <- function(title = shiny::HTML("&copy; 2024"), rightContent = NULL, bg.col = "#2a2725", text.col = "#f5f5f5") {
   htmltools::tags$div(class = "page-footer", style = paste0("background:",bg.col,";color: ",text.col),
                         shiny::div(title, shiny::div(class="hidden-mobile hidden-tablet pull-right",rightContent))
   )
