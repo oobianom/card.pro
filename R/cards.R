@@ -241,7 +241,7 @@ moveable <- function(...) {
 
 primePanel <- function(..., width = 8, border = FALSE, shadow = FALSE) {
   shiny::div(
-    class = paste0("p-0 m-0 col-12 col-md-", width),
+    class = paste0("card-pro-prime p-0 m-0 col-12 col-md-", width),
     class = ifelse(border, "border", ""),
     class = ifelse(shadow, "shadow", ""),
     role = "main",
@@ -299,5 +299,5 @@ altPanel <- function(..., width = 4, border = FALSE, shadow = FALSE) {
 
 wrapper <- function(..., bg = c("default", "primary", "secondary", "warning", "info", "danger", "success")) {
   bg <- match.arg(bg)
-  htmltools::tags$div(class = "xwrapper", class = paste0("bg-", bg), ...)
+  htmltools::tags$div(class = "xwrapper card-pro-wrapper", class = paste0("bg-", bg), ...)
 }
