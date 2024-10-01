@@ -64,7 +64,7 @@ use.cardpro <-
         )
       ),
       if(file.exists("www/myscript.js")){htmltools::tags$script(src="myscript.js")},
-      if(file.exists("www/myscript.css")){htmltools::tags$link(href="myscript.css")},
+      if(file.exists("www/myscript.css")){htmltools::tags$link(rel="stylesheet", type="text/css", href="myscript.css")},
       htmltools::tags$link(
         href = ifelse(
           fontawesome,
