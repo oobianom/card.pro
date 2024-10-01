@@ -25,11 +25,14 @@ row <- function(...) {
 #' @param fontawesome option. logical. include fontawesome
 #' @param fix.header logical. fix header if titlePanel2() is used in UI
 #'
+#' @note
+#' Theme options are "a", "b", "c", "d" or "e"
+#'
 #' @return A list of files to be inserted in the header of a page
 #' @examples
 #' if(interactive()){
 #' use.cardpro()
-#' use.cardpro(theme="a",jqueryui = T, fontawesome = F)
+#' use.cardpro(theme="a",jqueryui = TRUE, fontawesome = FALSE)
 #' }
 #' @export
 #'
