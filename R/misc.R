@@ -10,7 +10,7 @@
 #' @export
 #'
 row <- function(...) {
-  htmltools::tags$div(class = "row", ...)
+  htmltools::tags$div(class = "row card-pro-row", ...)
 }
 
 
@@ -108,7 +108,7 @@ nav <- function(class,
                 role = NULL,
                 ...) {
   shiny::HTML(paste0(
-    "<nav class='",
+    "<nav class='card-pro-nav ",
     class,
     "' id='",
     id,
