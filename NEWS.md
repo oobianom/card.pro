@@ -1,3 +1,8 @@
+# card.pro 2.2.1
+
+- [x] Revise scripts and stylesheet
+
+
 # card.pro 2.2.0
 
 - [x] Include shadow
