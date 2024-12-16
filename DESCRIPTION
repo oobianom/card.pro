@@ -19,8 +19,7 @@ Imports:
 Suggests: 
     rmarkdown,
     knitr,
-    qpdf,
-    testthat
+    qpdf
 Encoding: UTF-8
 VignetteBuilder: knitr
 Language: en-US
