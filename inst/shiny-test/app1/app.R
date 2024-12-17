@@ -6,6 +6,7 @@ ui <- fluidPage(
   use.cardpro(theme = "a", fix.header = TRUE),
   moveable(
     tags$h2("   card.pro package: shiny 2.0 Built to your specifications..."),
+    tags$h4(class ="c-purple","drag, resize, rearrage and refresh. your settings preserved!"),
     tags$hr(),
     card.pro(
       "This is the setup",
@@ -28,12 +29,14 @@ ui <- fluidPage(
       ),
       title = "Analysis Setup",
       width = 3,
-      header.bg = "darken",
+      header.bg = "purple",
       colorbtn = FALSE,
       editbtn = FALSE
     ),
     card.pro(
       plotOutput("distPlot"),
+      plotOutput("distPlot2"),
+      xtra.header.content = div(class="c-red","Downloading graph..."),
       sidebar = div(
         "Plot settings",
         textInput("testy", "Y-axis title", "Concentration"),
@@ -43,14 +46,15 @@ ui <- fluidPage(
         actionButton("test3", "Re-graph")
       ),
       title = "Plot output",
-      width = 5,
-      header.bg = "blue",
+      width = 6,
+      header.bg = "yellow",
     ),
     card.pro(
       tableOutput("table1"),
       title = "Summary table",
-      width = 4,
-      header.bg = "red"
+      width = 3,
+      header.bg = "red",
+      footer = "Here is a sample footer for descriptions"
     )
   )
 )
@@ -71,6 +75,13 @@ server <- function(input, output) {
       xlab = input$testx,
       main = input$testy
     )
+  })
+  output$distPlot2 <- renderPlot({
+    # generate bins based on input$bins from ui.R
+    x <- faithful[, 2]
+    bins <- seq(min(x), max(x), length.out = input$bins + 1)
+
+    plot(bins,quickcode::number(length(bins)))
   })
 }
 # Run the application
