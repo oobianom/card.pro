@@ -56,6 +56,7 @@ ui <- fluidPage(
       width = 6,
       icon = icon("globe"),
       header.bg = "blue",
+      footer = "Footnote or legend..."
     ),
     
     
@@ -68,7 +69,7 @@ ui <- fluidPage(
         tabEntry("Tab 1",
                  textInput("nor1", "Enter name"), "Content for 1"),
         tabEntry("Tab 2",
-                 actionButton("nor1", "Try click"), "sample")
+                 actionButton("nor1", "Try to click"), "sample")
       )
     )
   )
