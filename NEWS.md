@@ -1,6 +1,7 @@
 # card.pro 2.2.1
 
 - [x] Revise scripts and stylesheet
+- [x] Fixed issues with fullscreen and exit of fullscreen
 
 
 # card.pro 2.2.0
