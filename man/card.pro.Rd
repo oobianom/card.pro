@@ -127,7 +127,7 @@ if (interactive()) {
 
   shiny::shinyApp(
     ui = fluidPage(
-      titlePanel("Change order and refresh"),
+      titlePanel("Change order and refresh, changes saved"),
       wrapper(
         moveable(
           card.pro(
@@ -150,6 +150,10 @@ if (interactive()) {
               "My settings",
               textInput("test2", "Input change"),
               actionButton("test3", "Click to save")
+            ),
+            footer = list(
+            "Footnote: example",
+            actionButton("test19", "Upload something")
             )
           )
         )
