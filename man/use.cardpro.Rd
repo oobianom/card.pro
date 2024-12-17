@@ -32,9 +32,12 @@ A list of files to be inserted in the header of a page
 \description{
 Use the package scripts and stylesheets in a page
 }
+\note{
+Theme options are "a", "b", "c", "d" or "e"
+}
 \examples{
 if(interactive()){
 use.cardpro()
-use.cardpro(theme="a",jqueryui = T, fontawesome = F)
+use.cardpro(theme="a",jqueryui = TRUE, fontawesome = FALSE)
 }
 }
