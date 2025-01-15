@@ -33,8 +33,8 @@ ui <- fluidPage(
         )
       ),
       collapsibleGroup = list(
-        collapseEntry(title = "Setup collapsible 1", collapsed = TRUE, "Convallis aesus."),
-        collapseEntry(title = "Setup collapsible2", collapsed = FALSE, "nextGenShinyApps.")
+        collapseEntry(title = "Setup collapsible 1", "Convallis aesus."),
+        collapseEntry(title = "Setup collapsible2", collapsed = TRUE, "nextGenShinyApps.")
       ),
       title = "Analysis Setup",
       width = 3,
@@ -68,13 +68,6 @@ ui <- fluidPage(
         collapseEntry(title = "Summary 2", collapsed = TRUE, "Lorem ipsum dolor sit amet")
       ),
       footer = "Here is a sample footer for descriptions"
-    ),
-    card.pro(
-      title = "Sample collapsible",width = 4,
-      collapsibleGroup = list(
-        collapseEntry(title = "Summary 1", collapsed = TRUE, "Convallis aesus."),
-        collapseEntry(title = "Summary 2", collapsed = FALSE, "nextGenShinyApps.")
-      )
     )
   )
 )
