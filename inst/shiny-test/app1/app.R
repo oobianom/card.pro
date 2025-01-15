@@ -34,6 +34,7 @@ ui <- fluidPage(
       editbtn = FALSE
     ),
     card.pro(
+      HTML('<p class="alert alert-info no-margin"> All progress bars contain a base class of <code> .progress </code> . Control the size of the progress bar with <code> .progress-xs </code> , <code> .progress-sm </code> , <code> .progress-lg </code> or leave as is for the default size. </p>'),
       plotOutput("distPlot"),
       plotOutput("distPlot2"),
       xtra.header.content = div(class="c-red","Downloading graph..."),
