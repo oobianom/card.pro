@@ -1,3 +1,8 @@
+# card.pro 2.3.0
+
+- [x] Introduce the collapsible panel group with card.pro container
+- [x] progressInput functionality for progress bar
+
 # card.pro 2.2.1
 
 - [x] Revise scripts and stylesheet
