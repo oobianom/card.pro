@@ -25,7 +25,8 @@ card.pro(
     "pinkDark", "blueLight", "teal", "blue", "blueDark", "darken", "yellow", "orange",
     "orangeDark", "red", "redLight"),
   alert.text = NULL,
-  alert.type = c("warning", "info", "success", "danger")
+  alert.type = c("warning", "info", "success", "danger"),
+  collapsibleGroup = NULL
 )
 }
 \arguments{
@@ -66,6 +67,8 @@ card.pro(
 \item{alert.text}{Enter text for the alert portion. Leave as NULL to exclude the alert}
 
 \item{alert.type}{Indicate the type of alert to include, choices are "warning", "info", "success", "danger"}
+
+\item{collapsibleGroup}{optional. A list collapsible items, see example}
 }
 \value{
 HTML code of the container with a class called card.pro that holds the items
@@ -152,8 +155,8 @@ if (interactive()) {
               actionButton("test3", "Click to save")
             ),
             footer = list(
-            "Footnote: example",
-            actionButton("test19", "Upload something")
+              "Footnote: example",
+              actionButton("test19", "Upload something")
             )
           )
         )
