@@ -224,6 +224,7 @@ tabEntry <- function(title, ...) {
 collapseEntry <- function(...,title, collapsed = FALSE, color.off = "darken", color.on = "red") {
   unit <- quickcode::number(1, max.digits = 4)
   .colin <- ifelse(collapsed," in","")
+  .colin2 <- ifelse(collapsed,"","collapsed")
   list(shiny::tags$div(
     class = "panel panel-default",
     shiny::tags$div(
@@ -234,7 +235,7 @@ collapseEntry <- function(...,title, collapsed = FALSE, color.off = "darken", co
           href = paste0("#collapse-",unit),
           `data-toggle` = "collapse",
           `data-parent` = paste0("#accordion-",accordioniId),
-          class = "collapsed",
+          class = .colin2,
           shiny::tags$i(class = paste0(
             "fa fa-fw fa-plus-circle txt-color-", color.off
           )),
