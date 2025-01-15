@@ -10,6 +10,7 @@
 #' @param alert.text Enter text for the alert portion. Leave as NULL to exclude the alert
 #' @param alert.type Indicate the type of alert to include, choices are "warning", "info", "success", "danger"
 #' @param tabs optional. A list containing tabs items, see example
+#' @param collapsibleGroup optional. A list collapsible items, see example
 #' @param icon Header icon e.g. shiny::icon('fire')
 #' @param xtra.header.content additional header content e.g. "Hi"
 #' @param footer Footer content if any
@@ -101,8 +102,8 @@
 #'               actionButton("test3", "Click to save")
 #'             ),
 #'             footer = list(
-#'             "Footnote: example",
-#'             actionButton("test19", "Upload something")
+#'               "Footnote: example",
+#'               actionButton("test19", "Upload something")
 #'             )
 #'           )
 #'         )
@@ -113,18 +114,18 @@
 #' }
 #'
 #' @export
-card.pro <- function(..., title,  collapsed = FALSE, width = 12, tabs = NULL, icon = NULL, xtra.header.content = NULL, footer = NULL,
+card.pro <- function(..., title, collapsed = FALSE, width = 12, tabs = NULL, icon = NULL, xtra.header.content = NULL, footer = NULL,
                      togglebtn = TRUE, editbtn = TRUE, expandbtn = TRUE, colorbtn = TRUE, removebtn = TRUE, sortable = TRUE, sidebar = NULL, shadow = TRUE,
-                     header.bg = c("white", "green", "greenDark", "greenLight", "purple", "magenta", "pink", "pinkDark", "blueLight", "teal", "blue", "blueDark", "darken", "yellow", "orange", "orangeDark", "red", "redLight"), alert.text = NULL, alert.type = c("warning", "info", "success", "danger")) {
+                     header.bg = c("white", "green", "greenDark", "greenLight", "purple", "magenta", "pink", "pinkDark", "blueLight", "teal", "blue", "blueDark", "darken", "yellow", "orange", "orangeDark", "red", "redLight"), alert.text = NULL, alert.type = c("warning", "info", "success", "danger"), collapsibleGroup = NULL) {
   header.bg <- match.arg(header.bg)
-
   nulltabs <- !is.null(tabs)
   inheritstabs <- inherits(tabs, "list") & length(tabs)
   gnum <- quickcode::number(1)
-  shd <- ifelse(shadow == FALSE,""," shadow")
+  shd <- ifelse(shadow == FALSE, "", " shadow")
+  accordioniId <<- quickcode::number(1, max.digits = 4)
   final.div <- htmltools::tags$div(
     id = paste0("wid-id-", gnum),
-    class = paste0("jarviswidget",shd),
+    class = paste0("jarviswidget", shd),
     class = paste0("jarviswidget-color-", header.bg),
     htmltools::tags$header(
       htmltools::tags$h2(icon, title),
@@ -145,6 +146,7 @@ card.pro <- function(..., title,  collapsed = FALSE, width = 12, tabs = NULL, ic
     ),
     # main body
     htmltools::tags$div(
+      id = paste0("cardpro-", accordioniId),
       class = "no-padding",
       htmltools::tags$div(
         class = "jarviswidget-editbox",
@@ -165,7 +167,7 @@ card.pro <- function(..., title,  collapsed = FALSE, width = 12, tabs = NULL, ic
         if (!is.null(sidebar)) {
           htmltools::tags$div(
             id = "chat-container",
-            htmltools::tags$span(class = "chat-list-open-close", style="padding-top: 7px;", htmltools::tags$i(class = "fa fa-cog")),
+            htmltools::tags$span(class = "chat-list-open-close", style = "padding-top: 7px;", htmltools::tags$i(class = "fa fa-cog")),
             htmltools::tags$div(class = "chat-list-body custom-scroll padding-10", sidebar)
           )
         },
@@ -179,10 +181,19 @@ card.pro <- function(..., title,  collapsed = FALSE, width = 12, tabs = NULL, ic
               })
             )
           }
+        },
+        if (!is.null(collapsibleGroup)) {
+          tags$div(
+            class = "panel-group smart-accordion-default",
+            id = paste0("accordion-", accordioniId),
+            if (inherits(collapsibleGroup, "list") & length(collapsibleGroup)) {
+              collapsibleGroup
+            }
+          )
         }
       ),
-      if(!is.null(footer)){
-      htmltools::tags$div(class="chat-footer padding-top-10",footer)
+      if (!is.null(footer)) {
+        htmltools::tags$div(class = "chat-footer padding-top-10", footer)
       }
     )
   )
@@ -221,87 +232,4 @@ card.pro <- function(..., title,  collapsed = FALSE, width = 12, tabs = NULL, ic
 
 moveable <- function(...) {
   shiny::tags$section(id = "cardpro-widget-grid", shiny::div(class = "row", ...))
-}
-
-
-
-#' Main panel to display content
-#'
-#' Customizable main panel for inclusion of various UI elements
-#'
-#' @param ... List of content
-#' @param width Width of the main panel
-#' @param border Should border be declared for the panel
-#' @param shadow Should a shadow be added to the panel
-#'
-#' @note For more information on the features of the main panel, look through the Github examples
-#' @return Creates a container for displaying contents
-#'
-#' @examples
-#' \donttest{
-#' primePanel("content 1")
-#' }
-#' @export
-
-primePanel <- function(..., width = 8, border = FALSE, shadow = FALSE) {
-  shiny::div(
-    class = paste0("card-pro-prime p-0 m-0 col-12 col-md-", width),
-    class = ifelse(border, "border", ""),
-    class = ifelse(shadow, "shadow", ""),
-    role = "main",
-    ...
-  )
-}
-
-
-
-#' New sidebar panel to display content
-#'
-#' Customizable sidebar panel for inclusion of various UI elements
-#'
-#' @param ... List of content
-#' @param width Width of the sidebar panel
-#' @param border Should border be declared for the panel
-#' @param shadow Should a shadow be added to the panel
-#'
-#' @note For more information on the features of the sidebar panel, look through the Github examples
-#' @return Creates an alternate container for displaying contents
-#'
-#' @examples
-#' \donttest{
-#' altPanel("content 2")
-#' }
-#' @export
-
-altPanel <- function(..., width = 4, border = FALSE, shadow = FALSE) {
-  htmltools::tags$div(
-    class = paste0("col-12 col-md-", width),
-    class = ifelse(border, "border", ""),
-    class = ifelse(shadow, "shadow", ""),
-    htmltools::tags$form(
-      class = "well",
-      role = "complementary", ...
-    )
-  )
-}
-
-
-#' A wrapper for panels
-#'
-#' Create a wrapper div for pannels
-#'
-#' @param ... div contents
-#' @param bg background color of the wrapper
-#'
-#' @return a container for other containers
-#'
-#' @examples
-#' wrapper(altPanel("hello"), shiny::mainPanel("test"))
-#' wrapper(shiny::mainPanel("hello"), shiny::column(width = 2, "test"))
-#' @export
-#'
-
-wrapper <- function(..., bg = c("default", "primary", "secondary", "warning", "info", "danger", "success")) {
-  bg <- match.arg(bg)
-  htmltools::tags$div(class = "xwrapper card-pro-wrapper", class = paste0("bg-", bg), ...)
 }
