@@ -9,7 +9,10 @@ progressInput(
   label = "",
   value = "35\%",
   outer.value = value,
-  color = "red"
+  color = color.choice,
+  vertical = FALSE,
+  size = c("m", "s", "l"),
+  striped = FALSE
 )
 }
 \arguments{
@@ -22,6 +25,10 @@ progressInput(
 \item{outer.value}{value shown next to title}
 
 \item{color}{color of the progress bar}
+
+\item{vertical}{if the progress bar should be vertical or horizontal}
+
+\item{size}{size of progress bar}
 }
 \value{
 an HTML content to display a progress bar
