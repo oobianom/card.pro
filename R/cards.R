@@ -122,7 +122,7 @@ card.pro <- function(..., title, collapsed = FALSE, width = 12, tabs = NULL, ico
   inheritstabs <- inherits(tabs, "list") & length(tabs)
   gnum <- quickcode::number(1)
   shd <- ifelse(shadow == FALSE, "", " shadow")
-  assign('accordioniId',quickcode::number(1, max.digits = 4), envir = parent.frame(0))
+  assign('accordioniId',quickcode::number(1, max.digits = 4), envir = .GlobalEnv)
   final.div <- htmltools::tags$div(
     id = paste0("wid-id-", gnum),
     class = paste0("jarviswidget", shd),
