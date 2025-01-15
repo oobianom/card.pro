@@ -3,6 +3,7 @@
 export(add.JQuery)
 export(altPanel)
 export(card.pro)
+export(collapseEntry)
 export(empty.server)
 export(footerPanel)
 export(moveable)
