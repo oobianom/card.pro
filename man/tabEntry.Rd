@@ -19,8 +19,13 @@ Create a tab panel item that is enclosed by a list
 }
 \examples{
 if (interactive()) {
-tabEntry("Summary", "Convallis aesus.")
-tabEntry("Summary", "nextGenShinyApps.")
+card.pro(
+  title = "Sample tabs",
+  tabs = list(
+    tabEntry("Summary", "Convallis aesus."),
+    tabEntry("Summary", "nextGenShinyApps.")
+  )
+)
 }
 
 }
