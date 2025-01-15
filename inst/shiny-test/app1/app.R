@@ -5,11 +5,13 @@ library(card.pro)
 ui <- fluidPage(
   use.cardpro(theme = "a", fix.header = TRUE),
   moveable(
-    tags$h2("   card.pro package: shiny 2.0 Built to your specifications..."),
+    tags$h2("card.pro package: shiny 2.0 Built to your specifications..."),
     tags$h4(class ="c-purple","drag, resize, rearrage and refresh. your settings preserved!"),
     tags$hr(),
     card.pro(
       "This is the setup",
+      alert.text = "Here is an alert functionality",
+      alert.type = "success",
       tabs = list(
         tabEntry(
           "Main",
