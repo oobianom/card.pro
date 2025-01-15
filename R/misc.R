@@ -311,15 +311,20 @@ footerPanel <- function(title = shiny::HTML("&copy; 2024"), rightContent = NULL,
 #' @param color color of the progress bar
 #' @param vertical if the progress bar should be vertical or horizontal
 #' @param size size of progress bar
+#' @param striped whether to show the progressed bar background as striped
 #' @return an HTML content to display a progress bar
 #'
 #' @examples
+#' if (interactive()) {
+#' library(shiny)
+#' library(card.pro)
+#'
 #' # Without much modification of defaults
 #' progressInput(id="id1")
 #'
 #' # Set color and value
 #' progressInput(id="id1", value = "90%", color = "green")
-#'
+#' }
 #' @export
 
 
@@ -338,15 +343,15 @@ progressInput <- function(id, label = "", value = "35%", outer.value = value, co
   #if striped
   if(striped).cl2 = " progress-striped"
   #create display
-  tags$div(
+  shiny::tags$div(
     id = id,
-    if(quickcode::not.empty(label)) tags$span(
+    if(quickcode::not.empty(label)) shiny::tags$span(
       class = "text", label,
-      tags$span(class = "pull-right", outer.value)
+      shiny::tags$span(class = "pull-right", outer.value)
     ),
-    tags$div(
+    shiny::tags$div(
       class = paste0(.cl,size,.cl2),
-      tags$div(class = paste0("progress-bar bg-color-", color), `data-transitiongoal` = "1", `aria-valuenow` = "1", style = paste0(.wh,": ", value, ";"), value)
+      shiny::tags$div(class = paste0("progress-bar bg-color-", color), `data-transitiongoal` = "1", `aria-valuenow` = "1", style = paste0(.wh,": ", value, ";"), value)
     )
   )
 }
