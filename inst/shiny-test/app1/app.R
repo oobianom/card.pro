@@ -11,7 +11,7 @@ ui <- fluidPage(
     card.pro(
       "This is the setup",
       alert.text = "Here is an alert functionality",
-      alert.type = "success",
+      alert.type = "danger",
       tabs = list(
         tabEntry(
           "Main",
@@ -36,7 +36,7 @@ ui <- fluidPage(
       editbtn = FALSE
     ),
     card.pro(
-      HTML('<p class="alert alert-info no-margin"> All progress bars contain a base class of <code> .progress </code> . Control the size of the progress bar with <code> .progress-xs </code> , <code> .progress-sm </code> , <code> .progress-lg </code> or leave as is for the default size. </p>'),
+      HTML('<div class="progress"> <div class="progress-bar bg-color-redLight" data-transitiongoal="100" style="width: 100%;" aria-valuenow="100">100%</div> </div>'),
       plotOutput("distPlot"),
       plotOutput("distPlot2"),
       xtra.header.content = div(class="c-red","Downloading graph..."),
