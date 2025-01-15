@@ -230,3 +230,39 @@ footerPanel <- function(title = shiny::HTML("&copy; 2024"), rightContent = NULL,
                         shiny::div(title, shiny::div(class="hidden-mobile hidden-tablet pull-right",rightContent))
   )
 }
+
+
+
+#' Create simple progress bar
+#'
+#' Create a progress bar within card container
+#'
+#' @param id id of the container
+#' @param label title of the progress bar
+#' @param value value of the progress bar in percent
+#' @param outer.value value shown next to title
+#' @param color color of the progress bar
+#' @return an HTML content to display a progress bar
+#' @examples
+#' # Without much modification of defaults
+#' progressInput(id="id1")
+#'
+#' # Set color and value
+#' progressInput(id="id1", value = "90%", color = "green")
+#'
+#' @export
+
+
+progressInput <- function(id, label = "", value = "35%", outer.value = value, color = "red") {
+  tags$div(
+    id = id,
+    if(quickcode::not.empty(label)) tags$span(
+      class = "text", label,
+      tags$span(class = "pull-right", outer.value)
+    ),
+    tags$div(
+      class = "progress",
+      tags$div(class = paste0("progress-bar bg-color-", color), `data-transitiongoal` = "1", `aria-valuenow` = "1", style = paste0("width: ", value, ";"), value)
+    )
+  )
+}
