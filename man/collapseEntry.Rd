@@ -34,7 +34,9 @@ Get color choices using quickcode:::color.choice
 }
 \examples{
 if (interactive()) {
-card.pro(
+ library(shiny)
+ library(card.pro)
+ card.pro(
   title = "Sample collapsible",width = 4,
   collapsibleGroup = list(
     collapseEntry(title = "Summary 1", collapsed = TRUE, "Convallis aesus."),
