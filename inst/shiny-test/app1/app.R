@@ -9,7 +9,10 @@ ui <- fluidPage(
     tags$h4(class ="c-purple","drag, resize, rearrage and refresh. your settings preserved!"),
     tags$hr(),
     card.pro(
-      "This is the setup",
+      tags$p("Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua."),
+      progressInput(id="id1", label = "TRACK the progress", striped = TRUE),
+      progressInput(id="id2", value = "90%", color = "green"),
+      progressInput(id="id3", value = "45%", color = "blue", size = "s"),
       alert.text = "Here is an alert functionality",
       alert.type = "danger",
       tabs = list(
@@ -29,6 +32,10 @@ ui <- fluidPage(
           actionButton("nor1", "Try click"), "sample"
         )
       ),
+      collapsibleGroup = list(
+        collapseEntry(title = "Setup collapsible 1", collapsed = TRUE, "Convallis aesus."),
+        collapseEntry(title = "Setup collapsible2", collapsed = FALSE, "nextGenShinyApps.")
+      ),
       title = "Analysis Setup",
       width = 3,
       header.bg = "purple",
@@ -36,7 +43,6 @@ ui <- fluidPage(
       editbtn = FALSE
     ),
     card.pro(
-      HTML('<div class="progress"> <div class="progress-bar bg-color-redLight" data-transitiongoal="100" style="width: 100%;" aria-valuenow="100">100%</div> </div>'),
       plotOutput("distPlot"),
       plotOutput("distPlot2"),
       xtra.header.content = div(class="c-red","Downloading graph..."),
@@ -57,7 +63,18 @@ ui <- fluidPage(
       title = "Summary table",
       width = 3,
       header.bg = "red",
+      collapsibleGroup = list(
+        collapseEntry(title = "Summary 1", collapsed = TRUE, "eiusmod tempor incididunt"),
+        collapseEntry(title = "Summary 2", collapsed = TRUE, "Lorem ipsum dolor sit amet")
+      ),
       footer = "Here is a sample footer for descriptions"
+    ),
+    card.pro(
+      title = "Sample collapsible",width = 4,
+      collapsibleGroup = list(
+        collapseEntry(title = "Summary 1", collapsed = TRUE, "Convallis aesus."),
+        collapseEntry(title = "Summary 2", collapsed = FALSE, "nextGenShinyApps.")
+      )
     )
   )
 )
