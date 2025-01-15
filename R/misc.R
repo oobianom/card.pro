@@ -171,8 +171,13 @@ empty.server <- function(input, output, session) {
 #'
 #' @examples
 #' if (interactive()) {
-#' tabEntry("Summary", "Convallis aesus.")
-#' tabEntry("Summary", "nextGenShinyApps.")
+#' card.pro(
+#'   title = "Sample tabs",
+#'   tabs = list(
+#'     tabEntry("Summary", "Convallis aesus."),
+#'     tabEntry("Summary", "nextGenShinyApps.")
+#'   )
+#' )
 #' }
 #'
 #' @export
@@ -184,6 +189,68 @@ tabEntry <- function(title, ...) {
     title = title,
     content = htmltools::div(...)
   )
+}
+
+#' Create a collapsible container panel item
+#'
+#' Create a collapsible container panel item that is enclosed by a list
+#'
+#' @param title title of the collapsible container
+#' @param collapsed whether the panel is collapsed or not
+#' @param color.on color of collapsible icon when hover on
+#' @param color.off color of collapsible icon when hover off
+#' @param ... content of the collapsible container
+#'
+#' @return An list containing the title and content of a collapsible container
+#' @details
+#' Get color choices using quickcode:::color.choice
+#'
+#' @examples
+#' if (interactive()) {
+#'  library(shiny)
+#'  library(card.pro)
+#'  card.pro(
+#'   title = "Sample collapsible",width = 4,
+#'   collapsibleGroup = list(
+#'     collapseEntry(title = "Summary 1", collapsed = TRUE, "Convallis aesus."),
+#'     collapseEntry(title = "Summary 2", "eiusmod tempor incididunt")
+#'   )
+#' )
+#' }
+#'
+#' @export
+#'
+#'
+collapseEntry <- function(...,title, collapsed = FALSE, color.off = "darken", color.on = "red") {
+  unit <- quickcode::number(1, max.digits = 4)
+  .colin <- ifelse(collapsed," in","")
+  list(shiny::tags$div(
+    class = "panel panel-default",
+    shiny::tags$div(
+      class = "panel-heading",
+      shiny::tags$h4(
+        class = "panel-title",
+        shiny::tags$a(
+          href = paste0("#collapse-",unit),
+          `data-toggle` = "collapse",
+          `data-parent` = paste0("#accordion-",accordioniId),
+          class = "collapsed",
+          shiny::tags$i(class = paste0(
+            "fa fa-fw fa-plus-circle txt-color-", color.off
+          )),
+          shiny::tags$i(class = paste0(
+            "fa fa-fw fa-minus-circle txt-color-", color.on
+          )),
+          title
+        )
+      )
+    ),
+    shiny::tags$div(
+      id = paste0("collapse-",unit),
+      class = paste0("panel-collapse collapse",.colin),
+      shiny::tags$div(class = "panel-body", ...)
+    )
+  ))
 }
 
 
@@ -242,7 +309,10 @@ footerPanel <- function(title = shiny::HTML("&copy; 2024"), rightContent = NULL,
 #' @param value value of the progress bar in percent
 #' @param outer.value value shown next to title
 #' @param color color of the progress bar
+#' @param vertical if the progress bar should be vertical or horizontal
+#' @param size size of progress bar
 #' @return an HTML content to display a progress bar
+#'
 #' @examples
 #' # Without much modification of defaults
 #' progressInput(id="id1")
@@ -253,7 +323,21 @@ footerPanel <- function(title = shiny::HTML("&copy; 2024"), rightContent = NULL,
 #' @export
 
 
-progressInput <- function(id, label = "", value = "35%", outer.value = value, color = "red") {
+progressInput <- function(id, label = "", value = "35%", outer.value = value, color = color.choice, vertical = FALSE, size = c("m","s","l"), striped = FALSE) {
+  color = match.arg(color)
+  size = match.arg(size)
+  size = switch (size,"s" = "-sm", "m" = "", "l"="-lg")
+  .cl = "progress progress"
+  .cl2 = ""
+  .wh = "width"
+  #if vertical
+  if(vertical){
+    .cl = "progress vertical progress"
+    .wh = "height"
+  }
+  #if striped
+  if(striped).cl2 = " progress-striped"
+  #create display
   tags$div(
     id = id,
     if(quickcode::not.empty(label)) tags$span(
@@ -261,8 +345,94 @@ progressInput <- function(id, label = "", value = "35%", outer.value = value, co
       tags$span(class = "pull-right", outer.value)
     ),
     tags$div(
-      class = "progress",
-      tags$div(class = paste0("progress-bar bg-color-", color), `data-transitiongoal` = "1", `aria-valuenow` = "1", style = paste0("width: ", value, ";"), value)
+      class = paste0(.cl,size,.cl2),
+      tags$div(class = paste0("progress-bar bg-color-", color), `data-transitiongoal` = "1", `aria-valuenow` = "1", style = paste0(.wh,": ", value, ";"), value)
     )
   )
+}
+
+
+
+
+
+
+#' Main panel to display content
+#'
+#' Customizable main panel for inclusion of various UI elements
+#'
+#' @param ... List of content
+#' @param width Width of the main panel
+#' @param border Should border be declared for the panel
+#' @param shadow Should a shadow be added to the panel
+#'
+#' @note For more information on the features of the main panel, look through the Github examples
+#' @return Creates a container for displaying contents
+#'
+#' @examples
+#' \donttest{
+#' primePanel("content 1")
+#' }
+#' @export
+
+primePanel <- function(..., width = 8, border = FALSE, shadow = FALSE) {
+  shiny::div(
+    class = paste0("card-pro-prime p-0 m-0 col-12 col-md-", width),
+    class = ifelse(border, "border", ""),
+    class = ifelse(shadow, "shadow", ""),
+    role = "main",
+    ...
+  )
+}
+
+
+
+#' New sidebar panel to display content
+#'
+#' Customizable sidebar panel for inclusion of various UI elements
+#'
+#' @param ... List of content
+#' @param width Width of the sidebar panel
+#' @param border Should border be declared for the panel
+#' @param shadow Should a shadow be added to the panel
+#'
+#' @note For more information on the features of the sidebar panel, look through the Github examples
+#' @return Creates an alternate container for displaying contents
+#'
+#' @examples
+#' \donttest{
+#' altPanel("content 2")
+#' }
+#' @export
+
+altPanel <- function(..., width = 4, border = FALSE, shadow = FALSE) {
+  htmltools::tags$div(
+    class = paste0("col-12 col-md-", width),
+    class = ifelse(border, "border", ""),
+    class = ifelse(shadow, "shadow", ""),
+    htmltools::tags$form(
+      class = "well",
+      role = "complementary", ...
+    )
+  )
+}
+
+
+#' A wrapper for panels
+#'
+#' Create a wrapper div for pannels
+#'
+#' @param ... div contents
+#' @param bg background color of the wrapper
+#'
+#' @return a container for other containers
+#'
+#' @examples
+#' wrapper(altPanel("hello"), shiny::mainPanel("test"))
+#' wrapper(shiny::mainPanel("hello"), shiny::column(width = 2, "test"))
+#' @export
+#'
+
+wrapper <- function(..., bg = c("default", "primary", "secondary", "warning", "info", "danger", "success")) {
+  bg <- match.arg(bg)
+  htmltools::tags$div(class = "xwrapper card-pro-wrapper", class = paste0("bg-", bg), ...)
 }
