@@ -29,6 +29,8 @@ progressInput(
 \item{vertical}{if the progress bar should be vertical or horizontal}
 
 \item{size}{size of progress bar}
+
+\item{striped}{whether to show the progressed bar background as striped}
 }
 \value{
 an HTML content to display a progress bar
@@ -37,10 +39,14 @@ an HTML content to display a progress bar
 Create a progress bar within card container
 }
 \examples{
+if (interactive()) {
+library(shiny)
+library(card.pro)
+
 # Without much modification of defaults
 progressInput(id="id1")
 
 # Set color and value
 progressInput(id="id1", value = "90\%", color = "green")
-
+}
 }
