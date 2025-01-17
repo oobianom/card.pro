@@ -7,7 +7,6 @@
 "_PACKAGE"
 
 .onLoad <- function(libname,pkgname){
-  utils::globalVariables(c("accordioniId"))
 }
 
 
