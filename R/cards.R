@@ -122,7 +122,7 @@ card.pro <- function(..., title, collapsed = FALSE, width = 12, tabs = NULL, ico
   inheritstabs <- inherits(tabs, "list") & length(tabs)
   gnum <- quickcode::number(1)
   shd <- ifelse(shadow == FALSE, "", " shadow")
-  assign('accordioniId',quickcode::number(1, max.digits = 4), envir = .GlobalEnv)
+  options(cardproaccordioniId = quickcode::number(1, max.digits = 4))
   final.div <- htmltools::tags$div(
     id = paste0("wid-id-", gnum),
     class = paste0("jarviswidget", shd),
@@ -146,7 +146,7 @@ card.pro <- function(..., title, collapsed = FALSE, width = 12, tabs = NULL, ico
     ),
     # main body
     htmltools::tags$div(
-      id = paste0("cardpro-", accordioniId),
+      id = paste0("cardpro-", options()$cardproaccordioniId),
       class = "no-padding",
       htmltools::tags$div(
         class = "jarviswidget-editbox",
@@ -185,7 +185,7 @@ card.pro <- function(..., title, collapsed = FALSE, width = 12, tabs = NULL, ico
         if (!is.null(collapsibleGroup)) {
           shiny::tags$div(
             class = "panel-group smart-accordion-default",
-            id = paste0("accordion-", accordioniId),
+            id = paste0("accordion-", options()$cardproaccordioniId),
             if (inherits(collapsibleGroup, "list") & length(collapsibleGroup)) {
               collapsibleGroup
             }
