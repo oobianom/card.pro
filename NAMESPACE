@@ -2,6 +2,7 @@
 
 export(add.JQuery)
 export(altPanel)
+export(card)
 export(card.pro)
 export(collapseEntry)
 export(empty.server)
