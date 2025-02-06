@@ -239,5 +239,5 @@ moveable <- function(...) {
 #' @export
 
 card <- function(...){
-  shiny::div(class = "trad-card well card bg-white shadow m-4", ...)
+  shiny::div(class = "trad-card well card bg-white shadow m-4", style="border-color:#ccc!important", ...)
 }
