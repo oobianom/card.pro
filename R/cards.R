@@ -22,7 +22,7 @@
 #' @param sortable If \code{FALSE}, the card will not be draggable
 #' @param sidebar optional. include side bar content
 #' @param shadow logical. add shadow to the card exterior
-#'
+#' @rdname cardcentral
 #' @note For more information on the features of the card, visit the examples section of the help documentation
 #' @return HTML code of the container with a class called card.pro that holds the items
 #'
@@ -232,4 +232,12 @@ card.pro <- function(..., title, collapsed = FALSE, width = 12, tabs = NULL, ico
 
 moveable <- function(...) {
   shiny::tags$section(id = "cardpro-widget-grid", shiny::div(class = "row", ...))
+}
+
+
+#' @rdname cardcentral
+#' @export
+
+card <- function(...){
+  shiny::div(class = "well", ...)
 }
