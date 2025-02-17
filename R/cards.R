@@ -225,8 +225,8 @@ card.pro <- function(..., title, collapsed = FALSE, width = 12, tabs = NULL, ico
 #'
 #' @examples
 #' moveable(
-#'   htmltools::tags$div("A"),
-#'   htmltools::tags$div("B")
+#'   card.pro(title="A", width=6,"content A"),
+#'   card.pro(title="A", width=6,"content A")
 #' )
 #' @export
 
@@ -239,5 +239,5 @@ moveable <- function(...) {
 #' @export
 
 card <- function(...){
-  shiny::div(class = "trad-card well card bg-white shadow m-4", style="border-color:#ccc!important", ...)
+  shiny::tags$article(class = "trad-card well card bg-white shadow m-4", style="border-color:#ccc!important", ...)
 }
