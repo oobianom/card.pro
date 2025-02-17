@@ -20,7 +20,7 @@ For more information on the features of a sortable grid, visit the examples sect
 }
 \examples{
 moveable(
-  htmltools::tags$div("A"),
-  htmltools::tags$div("B")
+  card.pro(title="A", width=6,"content A"),
+  card.pro(title="A", width=6,"content A")
 )
 }
